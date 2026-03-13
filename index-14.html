@@ -1,0 +1,2897 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krem Beauty – Salon Fryzjerski & Beauty Kraków</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #e8a4c0;
+    --rose-light: #f5d6e6;
+    --rose-pale: #fdf0f6;
+    --violet: #7c4b8a;
+    --violet-deep: #4a2560;
+    --violet-mid: #9b6aad;
+    --violet-soft: #c5a0d4;
+    --cream: #fdf8fc;
+    --dark: #2a1535;
+    --text: #3d2048;
+    --text-soft: #7a5c8a;
+    --gold: #c9a96e;
+    --gradient-main: linear-gradient(135deg, #7c4b8a 0%, #b06ba0 40%, #e8a4c0 100%);
+    --gradient-soft: linear-gradient(160deg, #fdf0f6 0%, #f0dff5 50%, #e8d5f0 100%);
+    --gradient-dark: linear-gradient(135deg, #4a2560 0%, #7c4b8a 100%);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ─── NAVIGATION ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(20px);
+    background: rgba(253, 240, 246, 0.85);
+    border-bottom: 1px solid rgba(232, 164, 192, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .nav-logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-logo-img {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: var(--rose);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--violet); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-cta {
+    background: var(--gradient-dark);
+    color: white !important;
+    padding: 10px 24px;
+    border-radius: 40px;
+    font-size: 11px !important;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+    box-shadow: 0 4px 20px rgba(124, 75, 138, 0.3);
+  }
+
+  .nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(124, 75, 138, 0.4) !important;
+  }
+
+  .nav-cta::after { display: none !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #2a1040 0%, #3d1a55 40%, #5a2070 100%);
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 80px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(232, 164, 192, 0.9);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 40px; height: 1px;
+    background: rgba(232, 164, 192, 0.6);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 90px);
+    font-weight: 300;
+    line-height: 1.0;
+    color: #ffffff;
+    margin-bottom: 32px;
+    letter-spacing: -1px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 400px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--gradient-main);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 8px 30px rgba(124, 75, 138, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(124, 75, 138, 0.45);
+  }
+
+  .btn-secondary {
+    color: var(--rose-light);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.3s;
+  }
+
+  .btn-secondary:hover { gap: 16px; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-bg-shape {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-soft);
+  }
+
+  .hero-decor-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+
+  .hero-decor-circle:nth-child(2) {
+    width: 500px; height: 500px;
+    background: var(--violet);
+    top: -100px; right: -100px;
+  }
+
+  .hero-decor-circle:nth-child(3) {
+    width: 300px; height: 300px;
+    background: var(--rose);
+    bottom: 50px; left: -50px;
+    opacity: 0.25;
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 80px;
+    right: 60px;
+    background: white;
+    border-radius: 20px;
+    padding: 24px 28px;
+    box-shadow: 0 20px 60px rgba(74, 37, 96, 0.15);
+    z-index: 3;
+    min-width: 180px;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 600;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .hero-badge-text {
+    font-size: 12px;
+    color: var(--text-soft);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  .hero-visual-card {
+    position: relative;
+    z-index: 2;
+    background: white;
+    border-radius: 24px;
+    padding: 48px 40px;
+    width: 340px;
+    box-shadow: 0 30px 80px rgba(74, 37, 96, 0.12);
+    animation: float 8s ease-in-out infinite;
+    animation-delay: -2s;
+  }
+
+  .hero-visual-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+
+  .hero-visual-services {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero-svc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rose-light);
+  }
+
+  .hero-svc-name {
+    font-size: 13px;
+    color: var(--text-soft);
+  }
+
+  .hero-svc-price {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--violet);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 80px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .scroll-line {
+    width: 40px; height: 1px;
+    background: var(--rose);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: var(--violet);
+    animation: scanline 2s linear infinite;
+  }
+
+  @keyframes scanline {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  /* ─── SECTION STYLES ─── */
+  section { padding: 100px 80px; }
+
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--violet-mid);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 30px; height: 1px;
+    background: var(--rose);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    color: var(--dark);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--violet);
+  }
+
+  .section-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-soft);
+    max-width: 520px;
+    font-weight: 300;
+  }
+
+  /* ─── SERVICES ─── */
+  #uslugi {
+    background: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #uslugi::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: var(--gradient-soft);
+    opacity: 0.5;
+    z-index: 0;
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 72px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: var(--rose-pale);
+    border-radius: 20px;
+    padding: 36px 32px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(232, 164, 192, 0.2);
+    cursor: pointer;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-main);
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 20px;
+  }
+
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(124, 75, 138, 0.15); }
+  .service-card:hover::before { opacity: 0.04; }
+
+  .service-card-icon {
+    width: 52px; height: 52px;
+    background: var(--gradient-main);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    font-size: 22px;
+  }
+
+  .service-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .service-card-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-soft);
+    margin-bottom: 20px;
+  }
+
+  .service-card-from {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--violet-mid);
+    font-weight: 500;
+  }
+
+  .service-card-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--violet);
+  }
+
+  /* ─── CENNIK ─── */
+  #cennik {
+    background: var(--gradient-soft);
+    position: relative;
+  }
+
+  .cennik-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .cennik-tabs {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cennik-tab {
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: var(--text-soft);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    background: transparent;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cennik-tab .tab-icon { font-size: 16px; }
+
+  .cennik-tab.active {
+    background: white;
+    color: var(--violet);
+    font-weight: 500;
+    box-shadow: 0 4px 20px rgba(124, 75, 138, 0.1);
+  }
+
+  .cennik-tab:hover:not(.active) { background: rgba(255,255,255,0.5); }
+
+  .cennik-content { display: none; }
+  .cennik-content.active { display: block; }
+
+  .cennik-section {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 30px rgba(74, 37, 96, 0.06);
+  }
+
+  .cennik-section-header {
+    padding: 24px 32px;
+    background: var(--gradient-main);
+    color: white;
+  }
+
+  .cennik-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+
+  .cennik-items { padding: 8px 0; }
+
+  .cennik-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    border-bottom: 1px solid var(--rose-pale);
+    transition: background 0.15s;
+  }
+
+  .cennik-item:last-child { border-bottom: none; }
+  .cennik-item:hover { background: var(--rose-pale); }
+
+  .cennik-item-name {
+    font-size: 14px;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .cennik-item-price {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--violet);
+    white-space: nowrap;
+    margin-left: 20px;
+  }
+
+  /* ─── ABOUT ─── */
+  #o-nas {
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-main-card {
+    background: var(--gradient-soft);
+    border-radius: 24px;
+    padding: 60px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-main-card::after {
+    content: 'K';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 300px;
+    font-weight: 600;
+    color: rgba(124, 75, 138, 0.06);
+    position: absolute;
+    top: -60px; right: -20px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .about-stat {
+    margin-bottom: 36px;
+  }
+
+  .about-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--violet);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .about-stat-label {
+    font-size: 13px;
+    color: var(--text-soft);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .about-float-card {
+    position: absolute;
+    bottom: -30px; right: -30px;
+    background: white;
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 16px 50px rgba(74, 37, 96, 0.12);
+    min-width: 200px;
+    animation: float 7s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  .about-float-icon { font-size: 28px; margin-bottom: 8px; }
+
+  .about-float-text {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.5;
+  }
+
+  .about-float-text strong {
+    display: block;
+    color: var(--dark);
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+
+  .about-text { padding: 20px 0; }
+
+  .about-features {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .about-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .about-feature-icon {
+    width: 36px; height: 36px;
+    min-width: 36px;
+    background: var(--rose-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .about-feature-text {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+
+  .about-feature-text strong {
+    display: block;
+    color: var(--dark);
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  /* ─── CONTACT ─── */
+  #kontakt {
+    background: var(--dark);
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #kontakt::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232, 164, 192, 0.1) 0%, transparent 70%);
+  }
+
+  #kontakt .section-eyebrow { color: var(--rose); }
+  #kontakt .section-eyebrow::before { background: var(--rose); }
+  #kontakt .section-title { color: white; }
+  #kontakt .section-title em { color: var(--rose); }
+  #kontakt .section-desc { color: rgba(255,255,255,0.6); }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 48px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .contact-icon {
+    width: 44px; height: 44px;
+    min-width: 44px;
+    background: rgba(232, 164, 192, 0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .contact-item-title {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .contact-item-value {
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+  }
+
+  .contact-item-value a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-item-value a:hover { color: var(--rose); }
+
+  .contact-map {
+    position: relative;
+    z-index: 1;
+  }
+
+  .map-container {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+    height: 380px;
+    background: rgba(255,255,255,0.05);
+    position: relative;
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(30%) hue-rotate(250deg) saturate(1.2);
+  }
+
+  .hours-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .hour-row {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .hour-row .day {
+    color: rgba(255,255,255,0.45);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ─── BOOK NOW ─── */
+  .book-banner {
+    background: var(--gradient-main);
+    padding: 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book-banner::before,
+  .book-banner::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .book-banner::before { width: 400px; height: 400px; top: -200px; left: -100px; }
+  .book-banner::after { width: 300px; height: 300px; bottom: -150px; right: -50px; }
+
+  .book-banner-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+  }
+
+  .book-banner-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 300;
+    color: white;
+    margin-bottom: 40px;
+    line-height: 1.1;
+  }
+
+  .book-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-white {
+    background: white;
+    color: var(--violet-deep);
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  }
+
+  .btn-white:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.2);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: white;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.4);
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--violet-deep);
+    color: white;
+    padding: 60px 80px 40px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: white;
+    margin-bottom: 16px;
+  }
+
+  .footer-brand-name span { color: var(--rose); font-style: italic; }
+
+  .footer-brand-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.5);
+    max-width: 260px;
+  }
+
+  .footer-col-title {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--rose-light); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 12px;
+  }
+
+  .social-btn {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+
+  .social-btn:hover { background: rgba(232, 164, 192, 0.25); }
+  .social-btn-ig:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important; color: white; }
+  .social-btn-fb:hover { background: #1877f2 !important; color: white; }
+
+  /* ─── FADE IN ANIMATIONS ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── MOBILE MENU TOGGLE ─── */
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .mobile-menu-btn span {
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--violet-deep);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .mobile-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mobile-menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .mobile-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-links.mobile-open {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    top: 72px; left: 0; right: 0;
+    background: rgba(253, 240, 246, 0.98);
+    backdrop-filter: blur(20px);
+    padding: 24px 32px 32px;
+    gap: 4px;
+    border-bottom: 1px solid rgba(232, 164, 192, 0.3);
+    box-shadow: 0 20px 40px rgba(74, 37, 96, 0.12);
+    z-index: 99;
+  }
+
+  .nav-links.mobile-open li a {
+    font-size: 16px;
+    padding: 14px 0;
+    display: block;
+    border-bottom: 1px solid rgba(232, 164, 192, 0.2);
+    letter-spacing: 2px;
+  }
+
+  .nav-links.mobile-open .nav-cta {
+    margin-top: 12px;
+    text-align: center;
+    padding: 14px 24px;
+    font-size: 13px !important;
+    border-bottom: none !important;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 120px 40px 80px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .cennik-layout { grid-template-columns: 1fr; }
+    .cennik-tabs { flex-direction: row; flex-wrap: wrap; position: static; }
+    #o-nas { grid-template-columns: 1fr; padding: 80px 40px; }
+    #kontakt { grid-template-columns: 1fr; padding: 80px 40px; }
+    footer { padding: 60px 40px 40px; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .mobile-menu-btn { display: flex; }
+    section { padding: 80px 40px; }
+    .book-banner { padding: 60px 40px; }
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 14px 20px; }
+    .nav-cta { display: none; }
+    .hero-left { padding: 100px 24px 60px; }
+    section { padding: 60px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 36px; }
+    #kontakt { padding: 60px 24px; }
+    #o-nas { padding: 60px 24px; }
+    .book-banner { padding: 60px 24px; }
+    footer { padding: 50px 24px 30px; }
+    .about-features { grid-template-columns: 1fr; }
+  }
+
+  .map-link-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    background: linear-gradient(135deg, #3d1a55 0%, #5a2070 100%);
+    border-radius: 20px;
+    padding: 48px 40px;
+    gap: 32px;
+    transition: transform 0.2s;
+  }
+
+  .map-link-card:hover { transform: scale(1.02); }
+
+  .map-pin-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+  }
+
+  .map-pin-rings {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .map-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(232, 164, 192, 0.3);
+    animation: ripple 3s ease-out infinite;
+  }
+
+  .map-ring-1 { width: 60px; height: 60px; animation-delay: 0s; }
+  .map-ring-2 { width: 90px; height: 90px; animation-delay: 0.6s; }
+  .map-ring-3 { width: 120px; height: 120px; animation-delay: 1.2s; }
+
+  @keyframes ripple {
+    0% { opacity: 0.6; transform: scale(0.8); }
+    100% { opacity: 0; transform: scale(1.2); }
+  }
+
+  .map-pin-dot {
+    font-size: 44px;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 4px 12px rgba(232,164,192,0.4));
+  }
+
+  .map-link-text {
+    text-align: center;
+  }
+
+  .map-link-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .map-link-address {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 20px;
+  }
+
+  .map-link-cta {
+    display: inline-block;
+    background: rgba(232, 164, 192, 0.2);
+    border: 1px solid rgba(232, 164, 192, 0.4);
+    color: var(--rose-light);
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+  }
+
+  .map-link-card:hover .map-link-cta {
+    background: rgba(232, 164, 192, 0.35);
+  }
+
+  /* ─── GALLERY ─── */
+  #galeria {
+    background: var(--dark);
+    padding: 100px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #galeria::before {
+    content: '';
+    position: absolute;
+    bottom: -200px; right: -200px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232, 164, 192, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .gallery-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  #galeria .section-eyebrow { color: var(--rose); }
+  #galeria .section-eyebrow::before { background: var(--rose); }
+  #galeria .section-title { color: white; }
+  #galeria .section-title em { color: var(--rose); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto 48px;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(232, 164, 192, 0.1);
+    aspect-ratio: 4/3;
+  }
+
+  .gallery-item.tall {
+    grid-row: span 2;
+    aspect-ratio: unset;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+
+  .gallery-item:hover img { transform: scale(1.07); }
+
+  .gallery-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(42, 16, 64, 0.85) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+  }
+
+  .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+  .gallery-item-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    letter-spacing: 1px;
+  }
+
+  /* Placeholder styling for when no real image */
+  .gallery-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(124, 75, 138, 0.3) 0%, rgba(232, 164, 192, 0.15) 100%);
+    min-height: 200px;
+  }
+
+  .gallery-placeholder-icon { font-size: 36px; opacity: 0.5; }
+
+  .gallery-placeholder-text {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .gallery-upload-hint {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 1px;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  @media (max-width: 1100px) {
+    #galeria { padding: 80px 40px; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item.tall { grid-row: span 1; aspect-ratio: 4/3; }
+  }
+
+  @media (max-width: 700px) {
+    #galeria { padding: 60px 24px; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  }
+
+  /* ─── REVIEWS PANEL ─── */
+  .reviews-panel {
+    background: var(--gradient-soft);
+    border-radius: 24px;
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(232, 164, 192, 0.2);
+  }
+
+  .reviews-panel::after {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 220px;
+    font-weight: 600;
+    color: rgba(124, 75, 138, 0.06);
+    position: absolute;
+    top: -30px; right: 10px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .reviews-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(232, 164, 192, 0.3);
+  }
+
+  .reviews-google-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-soft);
+    letter-spacing: 0.5px;
+  }
+
+  .reviews-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .reviews-stars {
+    color: #f4b942;
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .reviews-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--violet);
+  }
+
+  .reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .review-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 22px;
+    box-shadow: 0 4px 20px rgba(74, 37, 96, 0.06);
+    transition: transform 0.2s;
+  }
+
+  .review-card:hover { transform: translateY(-2px); }
+
+  .review-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .review-avatar {
+    width: 38px; height: 38px;
+    min-width: 38px;
+    border-radius: 50%;
+    background: var(--gradient-main);
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .review-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark);
+  }
+
+  .review-stars {
+    color: #f4b942;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .review-text {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-soft);
+    font-style: italic;
+  }
+
+  .reviews-link {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--violet);
+    text-decoration: none;
+    font-weight: 500;
+    transition: gap 0.2s;
+  }
+
+  .reviews-link:hover { color: var(--violet-deep); }
+
+  .gallery-ig-link {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    font-style: italic;
+    margin-top: 8px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .gallery-ig-link:hover { color: var(--rose); }
+
+  .gallery-item.tall {
+    min-height: 500px;
+  }
+
+  .gallery-grid-2 {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  @media (max-width: 1100px) {
+    .gallery-grid-2 { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+  @media (max-width: 700px) {
+    .gallery-grid-2 { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+
+  /* ─── LIGHTBOX ─── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(20, 5, 30, 0.95);
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    cursor: zoom-out;
+    animation: fadeInLb 0.25s ease;
+  }
+
+  .lightbox.open { display: flex; }
+
+  @keyframes fadeInLb {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .lightbox-img {
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 16px;
+    box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+    animation: zoomInLb 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: default;
+  }
+
+  @keyframes zoomInLb {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .lightbox-label {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 24px; right: 28px;
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 2;
+  }
+
+  .lightbox-close:hover { background: rgba(232, 164, 192, 0.3); }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 2;
+  }
+
+  .lightbox-nav:hover { background: rgba(232, 164, 192, 0.3); }
+  .lightbox-prev { left: 24px; }
+  .lightbox-next { right: 24px; }
+
+  .gallery-item { cursor: zoom-in; }
+
+  /* ─── CHATBOT ─── */
+  .chat-bubble {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    z-index: 9997;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .chat-toggle {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--gradient-main);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(124, 75, 138, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+
+  .chat-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(124, 75, 138, 0.55);
+  }
+
+  .chat-toggle-dot {
+    position: absolute;
+    top: 2px; right: 2px;
+    width: 14px; height: 14px;
+    background: #4ade80;
+    border-radius: 50%;
+    border: 2px solid white;
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+  }
+
+  .chat-window {
+    width: 360px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(42, 16, 64, 0.2);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    max-height: 520px;
+    animation: slideUpChat 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .chat-window.open { display: flex; }
+
+  @keyframes slideUpChat {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .chat-header {
+    background: var(--gradient-main);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chat-header-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .chat-header-info { flex: 1; }
+
+  .chat-header-name {
+    font-weight: 600;
+    color: white;
+    font-size: 15px;
+  }
+
+  .chat-header-status {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  .chat-header-status::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: #4ade80;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #fdf8fc;
+    max-height: 320px;
+  }
+
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-track { background: transparent; }
+  .chat-messages::-webkit-scrollbar-thumb { background: var(--rose-light); border-radius: 2px; }
+
+  .msg {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+  }
+
+  .msg.bot { justify-content: flex-start; }
+  .msg.user { justify-content: flex-end; }
+
+  .msg-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--gradient-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .msg-bubble {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .msg.bot .msg-bubble {
+    background: white;
+    color: var(--text);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 8px rgba(74,37,96,0.08);
+  }
+
+  .msg.user .msg-bubble {
+    background: var(--gradient-main);
+    color: white;
+    border-bottom-right-radius: 4px;
+  }
+
+  .chat-quick-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 16px 12px;
+    background: #fdf8fc;
+  }
+
+  .quick-btn {
+    background: white;
+    border: 1px solid rgba(232, 164, 192, 0.5);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--violet);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+  }
+
+  .quick-btn:hover {
+    background: var(--rose-pale);
+    border-color: var(--rose);
+  }
+
+  .chat-input-row {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--rose-light);
+    background: white;
+    align-items: center;
+  }
+
+  .chat-input {
+    flex: 1;
+    border: 1px solid rgba(232, 164, 192, 0.4);
+    border-radius: 20px;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    outline: none;
+    background: #fdf8fc;
+    transition: border-color 0.2s;
+  }
+
+  .chat-input:focus { border-color: var(--violet-soft); }
+  .chat-input::placeholder { color: var(--text-soft); opacity: 0.6; }
+
+  .chat-send {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--gradient-main);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    color: white;
+    font-size: 16px;
+  }
+
+  .chat-send:hover { transform: scale(1.1); }
+
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 10px 14px;
+    background: white;
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 8px rgba(74,37,96,0.08);
+    width: fit-content;
+  }
+
+  .typing-dot {
+    width: 7px; height: 7px;
+    background: var(--violet-soft);
+    border-radius: 50%;
+    animation: typingBounce 1.2s infinite;
+  }
+
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+  }
+
+  @media (max-width: 700px) {
+    .chat-window { width: calc(100vw - 40px); }
+    .chat-bubble { bottom: 20px; right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION ─── -->
+<nav id="navbar">
+  <a href="#" class="nav-logo"><img src="images/logo.png" alt="Krem Beauty" class="nav-logo-img"></a>
+  <ul class="nav-links">
+    <li><a href="#uslugi">Usługi</a></li>
+    <li><a href="#cennik">Cennik</a></li>
+    <li><a href="#o-nas">O nas</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+    <li><a href="tel:+48532585508" class="nav-cta">Zadzwoń</a></li>
+  </ul>
+  <button class="mobile-menu-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="start">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Salon Fryzjerski & Beauty • Kraków</p>
+    <h1 class="hero-title">Piękno<br>w każdym<br><em>detalu</em></h1>
+    <p class="hero-subtitle">Twoje miejsce na mapie Krakowa — gdzie profesjonalizm spotyka się z pasją. Fryzjerstwo, stylizacja rzęs, manicure, pedicure i pielęgnacja urody.</p>
+    <div class="hero-actions">
+      <a href="https://booksy.com/pl-pl/dl/show-business/254051" target="_blank" class="btn-primary">Umów wizytę</a>
+      <a href="#cennik" class="btn-secondary">Zobacz cennik →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-bg-shape"></div>
+    <div class="hero-decor-circle"></div>
+    <div class="hero-decor-circle"></div>
+
+    <div class="hero-visual-card">
+      <p class="hero-visual-card-title">Popularne zabiegi</p>
+      <div class="hero-visual-services">
+        <div class="hero-svc-item">
+          <span class="hero-svc-name">Strzyżenie damskie</span>
+          <span class="hero-svc-price">od 150 zł</span>
+        </div>
+        <div class="hero-svc-item">
+          <span class="hero-svc-name">Balayage + tonowanie</span>
+          <span class="hero-svc-price">od 480 zł</span>
+        </div>
+        <div class="hero-svc-item">
+          <span class="hero-svc-name">Manicure hybrydowy</span>
+          <span class="hero-svc-price">165 zł</span>
+        </div>
+        <div class="hero-svc-item">
+          <span class="hero-svc-name">Przedłużanie rzęs 1:1</span>
+          <span class="hero-svc-price">od 170 zł</span>
+        </div>
+        <div class="hero-svc-item">
+          <span class="hero-svc-name">Laminacja brwi</span>
+          <span class="hero-svc-price">150 zł</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-badge">
+      <div class="hero-badge-num">10+</div>
+      <div class="hero-badge-text">lat doświadczenia<br>w branży beauty</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    Przewiń
+  </div>
+</section>
+
+<!-- ─── SERVICES OVERVIEW ─── -->
+<section id="uslugi">
+  <div class="services-header">
+    <p class="section-eyebrow">Co oferujemy</p>
+    <h2 class="section-title">Kompleksowa pielęgnacja<br><em>urody</em></h2>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card fade-in" onclick="goToTab('fryzjerstwo')" style="cursor:pointer;">
+      <div class="service-card-icon">✂️</div>
+      <div class="service-card-name">Fryzjerstwo</div>
+      <p class="service-card-desc">Strzyżenia, modelowanie, stylizacje okolicznościowe, fale hollywood i koloryzacja wykonywana z pasją i precyzją.</p>
+      <div>
+        <div class="service-card-from">od</div>
+        <div class="service-card-price">150 zł</div>
+      </div>
+    </div>
+
+    <div class="service-card fade-in" onclick="goToTab('koloryzacja')" style="animation-delay:0.1s;cursor:pointer;">
+      <div class="service-card-icon">🎨</div>
+      <div class="service-card-name">Koloryzacja</div>
+      <p class="service-card-desc">Balayage, ombre, refleksy, tonowanie, rozjaśnianie, dekoloryzacja — każdy odcień dopasowany idealnie do Ciebie.</p>
+      <div>
+        <div class="service-card-from">od</div>
+        <div class="service-card-price">270 zł</div>
+      </div>
+    </div>
+
+    <div class="service-card fade-in" onclick="goToTab('rzesy')" style="animation-delay:0.2s;cursor:pointer;">
+      <div class="service-card-icon">👁️</div>
+      <div class="service-card-name">Stylizacja rzęs</div>
+      <p class="service-card-desc">Przedłużanie rzęs 1:1 do 6D, efekt mokry, efekt „KIM", laminacja rzęs oraz uzupełnianie.</p>
+      <div>
+        <div class="service-card-from">od</div>
+        <div class="service-card-price">170 zł</div>
+      </div>
+    </div>
+
+    <div class="service-card fade-in" onclick="goToTab('manicure')" style="animation-delay:0.3s;cursor:pointer;">
+      <div class="service-card-icon">💅</div>
+      <div class="service-card-name">Manicure & Pedicure</div>
+      <p class="service-card-desc">Manicure klasyczny, hybrydowy, japoński, przedłużanie paznokci żelowe, poligiel, pedicure SPA.</p>
+      <div>
+        <div class="service-card-from">od</div>
+        <div class="service-card-price">95 zł</div>
+      </div>
+    </div>
+
+    <div class="service-card fade-in" onclick="goToTab('brwi')" style="animation-delay:0.4s;cursor:pointer;">
+      <div class="service-card-icon">🌿</div>
+      <div class="service-card-name">Brwi & Depilacja</div>
+      <p class="service-card-desc">Henna brwi, henna pudrowa, laminacja brwi, regulacja, depilacja woskiem różnych partii ciała.</p>
+      <div>
+        <div class="service-card-from">od</div>
+        <div class="service-card-price">30 zł</div>
+      </div>
+    </div>
+
+    <div class="service-card fade-in" onclick="goToTab('pakiety')" style="animation-delay:0.5s;cursor:pointer;">
+      <div class="service-card-icon">✨</div>
+      <div class="service-card-name">Pakiety & Pielęgnacja</div>
+      <p class="service-card-desc">Odżywcze zabiegi dla włosów K18, peelingi dłoni i stóp, parafina, zabieg SPA oraz atrakcyjne pakiety usług.</p>
+      <div>
+        <div class="service-card-from">od</div>
+        <div class="service-card-price">180 zł</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CENNIK ─── -->
+<section id="cennik">
+  <div style="text-align:center; margin-bottom:60px;">
+    <p class="section-eyebrow">Szczegółowy cennik</p>
+    <h2 class="section-title">Przejrzyste <em>ceny</em></h2>
+    <p class="section-desc" style="margin:0 auto">Wybierz kategorię, aby zobaczyć szczegółowe ceny usług. Ostateczna wycena może zależeć od długości i gęstości włosów.</p>
+  </div>
+
+  <div class="cennik-layout">
+    <div class="cennik-tabs">
+      <button class="cennik-tab active" onclick="showTab('fryzjerstwo')">
+        <span class="tab-icon">✂️</span> Fryzjerstwo
+      </button>
+      <button class="cennik-tab" onclick="showTab('koloryzacja')">
+        <span class="tab-icon">🎨</span> Koloryzacja
+      </button>
+      <button class="cennik-tab" onclick="showTab('rzesy')">
+        <span class="tab-icon">👁️</span> Rzęsy
+      </button>
+      <button class="cennik-tab" onclick="showTab('brwi')">
+        <span class="tab-icon">🌿</span> Brwi & Depilacja
+      </button>
+      <button class="cennik-tab" onclick="showTab('manicure')">
+        <span class="tab-icon">💅</span> Manicure
+      </button>
+      <button class="cennik-tab" onclick="showTab('pedicure')">
+        <span class="tab-icon">🦶</span> Pedicure
+      </button>
+      <button class="cennik-tab" onclick="showTab('pakiety')">
+        <span class="tab-icon">🎁</span> Pakiety
+      </button>
+      <button class="cennik-tab" onclick="showTab('dodatki')">
+        <span class="tab-icon">➕</span> Dodatki
+      </button>
+    </div>
+
+    <div class="cennik-content active" id="tab-fryzjerstwo">
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Strzyżenia</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Strzyżenie damskie</span><span class="cennik-item-price">150 / 160 / 170 / 180 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Strzyżenie damskie (top-stylista)</span><span class="cennik-item-price">180 / 200 / 220 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Strzyżenie (włosy kręcone)</span><span class="cennik-item-price">od 180 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Podcięcie grzywki</span><span class="cennik-item-price">50 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Strzyżenie dziecięce</span><span class="cennik-item-price">80 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Strzyżenie męskie</span><span class="cennik-item-price">90 / 140 zł+</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Zarost (broda)</span><span class="cennik-item-price">od 65 zł</span></div>
+        </div>
+      </div>
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Stylizacja i modelowanie</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Modelowanie włosów</span><span class="cennik-item-price">80 / 100 / 120 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Próbna ślubna fryzura</span><span class="cennik-item-price">200 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Fryzura wieczorowa (fale)</span><span class="cennik-item-price">200 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Fryzura okolicznościowa (upięcie)</span><span class="cennik-item-price">250 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Fryzura ślubna</span><span class="cennik-item-price">400 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Fale hollywood</span><span class="cennik-item-price">210 / 250 / 290 zł</span></div>
+        </div>
+      </div>
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Pielęgnacja i regeneracja włosów</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Odnowa włosów od brade</span><span class="cennik-item-price">180 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Pielęgnacja dla włosów K18</span><span class="cennik-item-price">200 / 240 / 260 zł</span></div>
+        </div>
+      </div>
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Trwała ondulacja</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Trwała ondulacja dla mężczyzn</span><span class="cennik-item-price">250 / 300 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Trwała ondulacja dla kobiet</span><span class="cennik-item-price">300 / 370 / 450 zł</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cennik-content" id="tab-koloryzacja">
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Koloryzacja</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Kolor jednolity + modelowanie</span><span class="cennik-item-price">270 / 305 / 340 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Refleks z tonowaniem</span><span class="cennik-item-price">450 / 480 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Airtouch</span><span class="cennik-item-price">od 850 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Balayage + tonowanie</span><span class="cennik-item-price">480 / 580 zł+</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Estetyczna integracja siwizny</span><span class="cennik-item-price">570 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Ombre</span><span class="cennik-item-price">550 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Rozjaśnienie odrostu + tonowanie</span><span class="cennik-item-price">380 / 400 / 480 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Tonowanie włosów</span><span class="cennik-item-price">280 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Dekoloryzacja</span><span class="cennik-item-price">480 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Brazil blond modelka</span><span class="cennik-item-price">420 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Męska koloryzacja (płukanka)</span><span class="cennik-item-price">od 100 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Rozjaśnianie włosów męskich</span><span class="cennik-item-price">350 / 400 zł</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cennik-content" id="tab-rzesy">
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Przedłużanie rzęs</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Przedłużanie rzęs 1:1</span><span class="cennik-item-price">od 170 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Przedłużanie 2D/3D</span><span class="cennik-item-price">195 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Przedłużanie rzęs 3D/4D</span><span class="cennik-item-price">220 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Przedłużanie rzęs 5D/6D</span><span class="cennik-item-price">260 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Przedłużanie rzęs efekt „KIM"</span><span class="cennik-item-price">220 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Przedłużanie rzęs „mokry efekt"</span><span class="cennik-item-price">210 zł</span></div>
+        </div>
+      </div>
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Uzupełnianie rzęs</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Uzupełnienie rzęs 1:1</span><span class="cennik-item-price">160 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Uzupełnienie rzęs 1:2</span><span class="cennik-item-price">170 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Uzupełnienie rzęs „mokry efekt"</span><span class="cennik-item-price">200 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Uzupełnienie rzęs 1:3</span><span class="cennik-item-price">185 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Uzupełnienie rzęs 1:4</span><span class="cennik-item-price">220 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Uzupełnienie rzęs „KIM"</span><span class="cennik-item-price">210 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Uzupełnienie rzęs 1:5/4:6</span><span class="cennik-item-price">240 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Zdjęcie rzęs</span><span class="cennik-item-price">50 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Henna rzęs</span><span class="cennik-item-price">50 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Laminacja rzęs</span><span class="cennik-item-price">140 zł</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cennik-content" id="tab-brwi">
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Brwi</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Henna brwi</span><span class="cennik-item-price">50 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Regulacja brwi (pęseta/wosk)</span><span class="cennik-item-price">50 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Henna brwi + regulacja</span><span class="cennik-item-price">100 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Henna pudrowa brwi</span><span class="cennik-item-price">85 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Henna pudrowa brwi z regulacją</span><span class="cennik-item-price">100 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Henna rzęs</span><span class="cennik-item-price">80 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Laminacja brwi (regulacja + farbowanie + botox)</span><span class="cennik-item-price">150 zł</span></div>
+        </div>
+      </div>
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Depilacja woskowa</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Przestrzeń między brwiami</span><span class="cennik-item-price">30 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Nos</span><span class="cennik-item-price">30 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Baki</span><span class="cennik-item-price">30 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Broda</span><span class="cennik-item-price">30 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Wąsik</span><span class="cennik-item-price">40 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Linia brzucha</span><span class="cennik-item-price">60 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Uda</span><span class="cennik-item-price">80 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Łydki</span><span class="cennik-item-price">80 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Przedramiona</span><span class="cennik-item-price">80 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Plecy</span><span class="cennik-item-price">150 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Brzuch (całość)</span><span class="cennik-item-price">100 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Ręce (całość)</span><span class="cennik-item-price">150 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Nogi (całość)</span><span class="cennik-item-price">150 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Bikini płytkie</span><span class="cennik-item-price">100 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Bikini całościowe</span><span class="cennik-item-price">150 zł</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cennik-content" id="tab-manicure">
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Manicure</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Manicure klasyczny</span><span class="cennik-item-price">95 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Manicure męski (higiena)</span><span class="cennik-item-price">120 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Manicure japoński</span><span class="cennik-item-price">130 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Manicure hybrydowy (jednolity kolor)</span><span class="cennik-item-price">165 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Uzupełnianie paznokci żelem + hybryda</span><span class="cennik-item-price">195 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Uzupełnianie paznokci poligiel + hybryda</span><span class="cennik-item-price">210 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Przedłużanie paznokci żelowe (S, M, L)</span><span class="cennik-item-price">215 / 225 / 240 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Rekonstrukcja obryzowanych paznokci</span><span class="cennik-item-price">220 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Wzmacnianie naturalnej płytki żelem + hybryda</span><span class="cennik-item-price">185 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Ściągnięcie hybrydy + manicure klasyczny</span><span class="cennik-item-price">120 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Ściągnięcie żelu + manicure klasyczny</span><span class="cennik-item-price">140 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Ściągnięcie żelu</span><span class="cennik-item-price">60 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Ściągnięcie hybrydy</span><span class="cennik-item-price">40 zł</span></div>
+        </div>
+      </div>
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Pielęgnacja dłoni i stóp</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Peeling dłoni</span><span class="cennik-item-price">50 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Peeling stóp + maska</span><span class="cennik-item-price">50 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Peeling dłoni + stopy + maska</span><span class="cennik-item-price">60 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Parafina na dłonie</span><span class="cennik-item-price">50 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Parafina na stopy</span><span class="cennik-item-price">60 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Parafina na dłonie + stopy</span><span class="cennik-item-price">90 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Zabieg SPA na stopy</span><span class="cennik-item-price">50 zł</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cennik-content" id="tab-pedicure">
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Pedicure</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Pedicure klasyczny</span><span class="cennik-item-price">150 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Pedicure męski</span><span class="cennik-item-price">160 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Pedicure hybrydowy ze SPA</span><span class="cennik-item-price">190 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Opracowanie paznokci (bez stóp) z odżywką</span><span class="cennik-item-price">120 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Opracowanie paznokci (bez stóp) zwykły lakier</span><span class="cennik-item-price">135 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Opracowanie paznokci + hybryda (bez stóp)</span><span class="cennik-item-price">165 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Ściągnięcie hybrydy + pedicure klasyczny</span><span class="cennik-item-price">160 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Opracowanie stóp</span><span class="cennik-item-price">100 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Ściągnięcie hybrydy</span><span class="cennik-item-price">40 zł</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cennik-content" id="tab-pakiety">
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Pakiety</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Manicure klasyczny + pedicure klasyczny</span><span class="cennik-item-price">220 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Uzupełnianie żelu + pedicure klasyczny</span><span class="cennik-item-price">305 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Manicure hybrydowy + pedicure hybrydowy</span><span class="cennik-item-price">330 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Uzupełnianie żelu + pedicure hybrydowy</span><span class="cennik-item-price">358 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Manicure japoński + pedicure japoński</span><span class="cennik-item-price">260 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Manicure hybrydowy + henna brwi + depilacja wąsika i brwi</span><span class="cennik-item-price">260 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Laminacja brwi (z farbowaniem) + rzęsy</span><span class="cennik-item-price">250 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Laminacja brwi (bez farbowania) + rzęsy</span><span class="cennik-item-price">230 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Kolor jednolity + laminacja brwi + rzęsy</span><span class="cennik-item-price">525 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Henna pudrowa + regulacja + depilacja wąsika</span><span class="cennik-item-price">120 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Henna brwi z regulacją + manicure hybrydowy</span><span class="cennik-item-price">215 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Koloryzacja siwych włosów + strzyżenie + pielęgnacja</span><span class="cennik-item-price">350 zł</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cennik-content" id="tab-dodatki">
+      <div class="cennik-section">
+        <div class="cennik-section-header">
+          <div class="cennik-section-title">Dodatki</div>
+        </div>
+        <div class="cennik-items">
+          <div class="cennik-item"><span class="cennik-item-name">Strzyżenie do koloryzacji</span><span class="cennik-item-price">95 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Mycie włosów</span><span class="cennik-item-price">50 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Gęste włosy</span><span class="cennik-item-price">od 50 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Kątka</span><span class="cennik-item-price">25 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Fołia</span><span class="cennik-item-price">50 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Malowanie zwykłym lakierem</span><span class="cennik-item-price">20 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Ko racja</span><span class="cennik-item-price">25 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Bazastrong</span><span class="cennik-item-price">20 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Zdobienia easy</span><span class="cennik-item-price">15 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Zdobienia hard</span><span class="cennik-item-price">30 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">French</span><span class="cennik-item-price">30 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Baby boomer</span><span class="cennik-item-price">30 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Pyłek</span><span class="cennik-item-price">30 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Colorite</span><span class="cennik-item-price">20 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Przedłużanie jednego paznokcia</span><span class="cennik-item-price">20 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Opracowanie onycholuzy</span><span class="cennik-item-price">20 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Rekonstrukcja paznokcia</span><span class="cennik-item-price">40 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Naprawa jednego paznokcia</span><span class="cennik-item-price">15 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Kwas dla grubych stóp</span><span class="cennik-item-price">25 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Kwas dla bardzo grubych pięt</span><span class="cennik-item-price">40 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Dermokosmetyki do pielęgnacji stóp</span><span class="cennik-item-price">40 zł</span></div>
+          <div class="cennik-item"><span class="cennik-item-name">Gęstość rzęs</span><span class="cennik-item-price">20 zł</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="o-nas">
+  <div class="about-visual fade-in">
+    <div class="reviews-panel">
+
+      <div class="reviews-header">
+        <div class="reviews-google-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          <span>Opinie Google</span>
+        </div>
+        <div class="reviews-rating">
+          <span class="reviews-stars">★★★★★</span>
+          <span class="reviews-score">5.0</span>
+        </div>
+      </div>
+
+      <div class="reviews-list">
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">A</div>
+            <div class="review-meta">
+              <div class="review-name">Anna Kalbus</div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="review-text">„Do tego salonu dojeżdżam z innego miasta, bo pracują tu prawdziwi profesjonaliści! Specjalne podziękowania dla Natalii Savki."</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">A</div>
+            <div class="review-meta">
+              <div class="review-name">Anna Godek</div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="review-text">„Pani Ilona doradziła mi tak genialnie, że w nowej fryzurze wręcz poczułam się bardziej sobą. Perfekcyjne cięcie i koloryzacja sprawiają, że włosy układają się świetnie. Gorąco polecam!"</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">E</div>
+            <div class="review-meta">
+              <div class="review-name">Ela</div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="review-text">„Jestem bardzo zadowolona z efektu, piękne i staranne wykonanie przy zachowaniu komfortu. Laminacja rzęs godna polecenia!"</p>
+        </div>
+
+      </div>
+
+      <a href="https://maps.app.goo.gl/TarigjSH9XSi3ibS6" target="_blank" class="reviews-link">
+        Zobacz wszystkie opinie →
+      </a>
+
+    </div>
+  </div>
+
+  <div class="about-text fade-in">
+    <p class="section-eyebrow">O nas</p>
+    <h2 class="section-title">Pasja do piękna<br><em>od lat</em></h2>
+    <p class="section-desc">Krem Beauty to miejsce, gdzie dbałość o każdy detal łączy się z ciepłą, przyjazną atmosferą. Nasz zespół specjalistów dba o to, abyś wychodziła od nas piękna, zadbana i pełna pewności siebie.</p>
+    <p class="section-desc" style="margin-top:20px">Oferujemy kompleksową obsługę beauty — od fryzjerstwa, przez stylizację rzęs i brwi, manicure i pedicure, aż po depilację i pielęgnację. Wszystko pod jednym dachem, w samym sercu Krakowa.</p>
+
+    <div class="about-features">
+      <div class="about-feature">
+        <div class="about-feature-icon">🏆</div>
+        <div class="about-feature-text">
+          <strong>Doświadczeni styliści</strong>
+          Regularnie szkoleni, śledzący najnowsze trendy
+        </div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">🌿</div>
+        <div class="about-feature-text">
+          <strong>Profesjonalne kosmetyki</strong>
+          Tylko sprawdzone, wysokiej jakości produkty
+        </div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">💝</div>
+        <div class="about-feature-text">
+          <strong>Indywidualne podejście</strong>
+          Każdy klient traktowany wyjątkowo
+        </div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">🔖</div>
+        <div class="about-feature-text">
+          <strong>Atrakcyjne pakiety</strong>
+          Łącz usługi i oszczędzaj
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section id="galeria">
+  <div class="gallery-header">
+    <p class="section-eyebrow">Nasza praca</p>
+    <h2 class="section-title">Galeria <em>realizacji</em></h2>
+  </div>
+
+  <div class="gallery-grid">
+
+    <!-- Zdjęcie 1 –  -->
+    <div class="gallery-item  fade-in">
+            <img src="images/IMG_5752.jpg" alt="Koloryzacja różowa" loading="lazy">
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-label">Koloryzacja</span>
+      </div>
+    </div>
+
+    <!-- Zdjęcie 2 -->
+    <div class="gallery-item fade-in">
+            <img src="images/IMG_5751.jpg" alt="Strzyżenie blond bob" loading="lazy">
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-label">Strzyżenie & Stylizacja</span>
+      </div>
+    </div>
+
+    <!-- Zdjęcie 3 -->
+    <div class="gallery-item fade-in">
+            <img src="images/IMG_5740.jpg" alt="Manicure nude" loading="lazy">
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-label">Manicure</span>
+      </div>
+    </div>
+
+    <!-- Zdjęcie 4 -->
+    <div class="gallery-item fade-in">
+            <img src="images/IMG_5738.jpg" alt="Stylizacja rzęs i brwi" loading="lazy">
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-label">Rzęsy & Brwi</span>
+      </div>
+    </div>
+
+    <!-- Zdjęcie 5 -->
+    <div class="gallery-item fade-in">
+            <img src="images/IMG_5750.jpg" alt="Manicure fioletowy" loading="lazy">
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-label">Manicure Hybrydowy</span>
+      </div>
+    </div>
+
+    <!-- Zdjęcie 6 -->
+    <div class="gallery-item fade-in">
+            <img src="images/IMG_5748.jpg" alt="Balayage długie fale" loading="lazy">
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-label">Balayage & Fale</span>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="gallery-grid gallery-grid-2" style="margin-top:0;">
+
+    <div class="gallery-item fade-in">
+      <img src="images/IMG_5746.jpg" alt="Przed i po balayage" loading="lazy">
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-label">Przed & Po – Balayage</span>
+      </div>
+    </div>
+
+    <div class="gallery-item fade-in">
+      <img src="images/IMG_5741.jpg" alt="Długie blond włosy stylizacja" loading="lazy">
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-label">Stylizacja & Modelowanie</span>
+      </div>
+    </div>
+
+    <div class="gallery-item fade-in">
+      <img src="images/IMG_5739.jpg" alt="Strzyżenie męskie kręcone" loading="lazy">
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-label">Strzyżenie Męskie</span>
+      </div>
+    </div>
+
+    <div class="gallery-item fade-in">
+      <img src="images/IMG_5747.jpg" alt="Pedicure czarny" loading="lazy">
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-label">Pedicure</span>
+      </div>
+    </div>
+
+  </div>
+  <a href="https://www.instagram.com/krem.beautykrakow?igsh=dTg4anJrYjlud3o0" target="_blank" class="gallery-ig-link">📸 Zobacz więcej realizacji na Instagramie @krem.beautykrakow →</a>
+</section>
+
+<!-- ─── BOOK NOW BANNER ─── -->
+<div class="book-banner">
+  <p class="book-banner-eyebrow">Nie czekaj dłużej</p>
+  <h2 class="book-banner-title">Zarezerwuj wizytę<br>już dziś</h2>
+  <div class="book-actions">
+    <a href="tel:+48532585508" class="btn-white">📞 Zadzwoń teraz</a>
+    <a href="https://www.instagram.com/krem.beautykrakow?igsh=dTg4anJrYjlud3o0" target="_blank" class="btn-ghost" style="display:inline-flex;align-items:center;gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> Instagram</a>
+  </div>
+</div>
+
+<!-- ─── CONTACT ─── -->
+<section id="kontakt">
+  <div style="position:relative;z-index:1">
+    <p class="section-eyebrow">Znajdź nas</p>
+    <h2 class="section-title">Kontakt<br><em>& lokalizacja</em></h2>
+    <p class="section-desc">Chętnie odpowiemy na każde pytanie i pomożemy dobrać idealną usługę dla Ciebie.</p>
+
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-item-title">Adres</div>
+          <div class="contact-item-value">ul. Krzywa 8, Kraków</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-item-title">Telefon</div>
+          <div class="contact-item-value"><a href="tel:+48532585508">532 585 508</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon" style="color:white;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+        <div>
+          <div class="contact-item-title">Instagram</div>
+          <div class="contact-item-value"><a href="https://www.instagram.com/krem.beautykrakow?igsh=dTg4anJrYjlud3o0" target="_blank">@krem.beautykrakow</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon" style="color:white;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+        <div>
+          <div class="contact-item-title">Facebook</div>
+          <div class="contact-item-value"><a href="https://www.facebook.com/share/18LfG5K2Hj/?mibextid=wwXIfr" target="_blank">Krem Beauty Kraków</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-item-title">Godziny otwarcia</div>
+          <div class="contact-item-value">
+            <div class="hours-grid">
+              <span class="hour-row"><span class="day">Pon–Sob</span><br>9:00–20:00</span>
+              <span class="hour-row"><span class="day">Niedziela</span><br>10:00–17:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-map fade-in">
+    <div class="map-container">
+      <a href="https://maps.google.com/?q=Krzywa+8,+Krakow" target="_blank" class="map-link-card">
+        <div class="map-pin-visual">
+          <div class="map-pin-rings">
+            <div class="map-ring map-ring-1"></div>
+            <div class="map-ring map-ring-2"></div>
+            <div class="map-ring map-ring-3"></div>
+          </div>
+          <div class="map-pin-dot">📍</div>
+        </div>
+        <div class="map-link-text">
+          <div class="map-link-name">Krem Beauty</div>
+          <div class="map-link-address">ul. Krzywa 8, Kraków</div>
+          <div class="map-link-cta">Otwórz w Google Maps →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name"><img src="images/logo.png" alt="Krem Beauty" style="height:60px;width:auto;object-fit:contain;"></div>
+      <p class="footer-brand-text">Salon fryzjerski i beauty w sercu Krakowa. Kompleksowa pielęgnacja urody — fryzjerstwo, rzęsy, brwi, manicure, pedicure i depilacja.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Usługi</div>
+      <ul class="footer-links">
+        <li><a href="#uslugi">Fryzjerstwo</a></li>
+        <li><a href="#uslugi">Koloryzacja</a></li>
+        <li><a href="#uslugi">Rzęsy</a></li>
+        <li><a href="#uslugi">Brwi & Depilacja</a></li>
+        <li><a href="#uslugi">Manicure & Pedicure</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Salon</div>
+      <ul class="footer-links">
+        <li><a href="#o-nas">O nas</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#cennik">Cennik</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontakt</div>
+      <ul class="footer-links">
+        <li><a href="#">ul. Krzywa 8, Kraków</a></li>
+        <li><a href="tel:+48532585508">532 585 508</a></li>
+        <li><a href="https://www.instagram.com/krem.beautykrakow?igsh=dTg4anJrYjlud3o0" target="_blank">@krem.beautykrakow</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Krem Beauty. Wszelkie prawa zastrzeżone.</span>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/krem.beautykrakow?igsh=dTg4anJrYjlud3o0" target="_blank" class="social-btn social-btn-ig" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a href="https://www.facebook.com/share/18LfG5K2Hj/?mibextid=wwXIfr" target="_blank" class="social-btn social-btn-fb" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ─── LIGHTBOX ─── -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
+  <div class="lightbox-label" id="lightboxLabel"></div>
+</div>
+<script>
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxLabel = document.getElementById('lightboxLabel');
+  let galleryImages = [];
+  let currentIndex = 0;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lightboxImg.src = galleryImages[index].src;
+    lightboxLabel.textContent = galleryImages[index].label;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentIndex].src;
+    lightboxLabel.textContent = galleryImages[currentIndex].label;
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentIndex].src;
+    lightboxLabel.textContent = galleryImages[currentIndex].label;
+  }
+
+  document.querySelectorAll('.gallery-item').forEach((item, index) => {
+    const img = item.querySelector('img');
+    const label = item.querySelector('.gallery-item-label');
+    if (img) {
+      galleryImages.push({ src: img.src, label: label ? label.textContent : '' });
+      item.addEventListener('click', () => openLightbox(galleryImages.length - (document.querySelectorAll('.gallery-item').length - index)));
+    }
+  });
+
+  // Rebuild properly
+  galleryImages = [];
+  document.querySelectorAll('.gallery-item img').forEach((img, i) => {
+    const label = img.closest('.gallery-item').querySelector('.gallery-item-label');
+    galleryImages.push({ src: img.src, label: label ? label.textContent : '' });
+    img.closest('.gallery-item').addEventListener('click', (function(idx) {
+      return function() { openLightbox(idx); };
+    })(i));
+  });
+
+  document.getElementById('lightboxClose').addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+  document.getElementById('lightboxPrev').addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+  document.getElementById('lightboxNext').addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+  lightbox.addEventListener('click', closeLightbox);
+  lightboxImg.addEventListener('click', (e) => e.stopPropagation());
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+
+
+  function goToTab(tabName) {
+    // Switch tab
+    document.querySelectorAll('.cennik-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.cennik-tab').forEach(el => el.classList.remove('active'));
+    const content = document.getElementById('tab-' + tabName);
+    if (content) content.classList.add('active');
+    const tabs = document.querySelectorAll('.cennik-tab');
+    tabs.forEach(tab => {
+      if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(tabName)) {
+        tab.classList.add('active');
+      }
+    });
+    // Scroll to cennik
+    document.getElementById('cennik').scrollIntoView({ behavior: 'smooth' });
+  }
+
+
+  // ─── CHATBOT ───
+  let chatWindow, chatMessages, chatInput;
+  let chatOpen = false;
+  let conversationHistory = [];
+
+  function initChat() {
+    if (!chatWindow) {
+      chatWindow = document.getElementById('chatWindow');
+      chatMessages = document.getElementById('chatMessages');
+      chatInput = document.getElementById('chatInput');
+      if (chatInput) {
+        chatInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') sendMessage();
+        });
+      }
+    }
+  }
+
+  const BOOKSY_URL = "https://booksy.com/pl-pl/dl/show-business/254051";
+
+  const systemPrompt = `Jesteś pomocnym asystentem salonu fryzjerskiego i beauty Krem Beauty w Krakowie przy ul. Krzywej 8.
+Odpowiadaj WYŁĄCZNIE po polsku, krótko i przyjaźnie (max 3 zdania).
+Informacje o salonie:
+- Adres: ul. Krzywa 8, Kraków
+- Telefon: 532 585 508
+- Godziny: Pon-Sob 9:00-20:00, Niedziela 10:00-17:00
+- Instagram: @krem.beautykrakow
+- Rezerwacje: przez Booksy (https://booksy.com/pl-pl/dl/show-business/254051)
+- Właścicielka: Natalia Savka
+Usługi i przykładowe ceny:
+- Strzyżenie damskie od 150 zł, Strzyżenie męskie od 90 zł
+- Koloryzacja jednolita od 270 zł, Balayage od 480 zł, Airtouch od 850 zł
+- Manicure hybrydowy 165 zł, Manicure klasyczny 95 zł
+- Pedicure klasyczny 150 zł, Pedicure hybrydowy ze SPA 190 zł
+- Przedłużanie rzęs 1:1 od 170 zł, Laminacja rzęs 140 zł
+- Laminacja brwi 150 zł, Henna brwi + regulacja 100 zł
+- Pakiety łączone dostępne np. manicure+pedicure od 220 zł
+Gdy klient pyta o rezerwację, zawsze podaj link do Booksy. Bądź ciepła i profesjonalna jak pracownik salonu beauty.`;
+
+  function toggleChat() {
+    initChat();
+    chatOpen = !chatOpen;
+    chatWindow.classList.toggle('open', chatOpen);
+    document.getElementById('chatToggle').innerHTML = chatOpen
+      ? '✕<div class="chat-toggle-dot"></div>'
+      : '💬<div class="chat-toggle-dot"></div>';
+    if (chatOpen && chatMessages.children.length === 0) {
+      setTimeout(() => addBotMessage('Cześć! 👋 Witaj w Krem Beauty! W czym mogę Ci pomóc? Możesz zapytać o usługi, ceny, godziny otwarcia lub umówić wizytę.'), 300);
+    }
+  }
+
+  function addMessage(text, type) {
+    const div = document.createElement('div');
+    div.className = 'msg ' + type;
+    if (type === 'bot') {
+      div.innerHTML = '<div class="msg-avatar">💜</div><div class="msg-bubble">' + text + '</div>';
+    } else {
+      div.innerHTML = '<div class="msg-bubble">' + text + '</div>';
+    }
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function addBotMessage(text) {
+    // Convert booksy URL to clickable link
+    const linked = text.replace(
+      /(https:\/\/booksy\.com[^\s]*)/g,
+      '<a href="$1" target="_blank" style="color:var(--violet);font-weight:500;">Zarezerwuj na Booksy →</a>'
+    );
+    addMessage(linked, 'bot');
+  }
+
+  function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'msg bot';
+    div.id = 'typingIndicator';
+    div.innerHTML = '<div class="msg-avatar">💜</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('typingIndicator');
+    if (t) t.remove();
+  }
+
+  async function sendMessage() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    chatInput.value = '';
+    document.getElementById('quickBtns').style.display = 'none';
+    addMessage(text, 'user');
+    conversationHistory.push({ role: 'user', content: text });
+    showTyping();
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system: systemPrompt,
+          messages: conversationHistory
+        })
+      });
+      const data = await response.json();
+      removeTyping();
+      const reply = data.reply || data.error || 'Przepraszam, spróbuj ponownie.';
+      conversationHistory.push({ role: 'assistant', content: reply });
+      addBotMessage(reply);
+    } catch (e) {
+      removeTyping();
+      addBotMessage('Przepraszam, wystąpił problem. Zadzwoń do nas: <a href="tel:+48532585508" style="color:var(--violet);font-weight:500;">532 585 508</a>');
+    }
+  }
+
+  function quickMsg(text) {
+    chatInput.value = text;
+    sendMessage();
+  }
+
+
+
+  // Tab switching for price list
+  function showTab(id) {
+    document.querySelectorAll('.cennik-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.cennik-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Mobile menu toggle
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+
+  menuBtn.addEventListener('click', () => {
+    menuBtn.classList.toggle('open');
+    navLinks.classList.toggle('mobile-open');
+  });
+
+  // Close menu when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuBtn.classList.remove('open');
+      navLinks.classList.remove('mobile-open');
+    });
+  });
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 60) {
+      nav.style.boxShadow = '0 4px 30px rgba(74, 37, 96, 0.1)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+</script>
+
+<!-- ─── CHATBOT ─── -->
+<div class="chat-bubble" id="chatBubble">
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-header-avatar">💜</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Krem Beauty</div>
+        <div class="chat-header-status">Jesteśmy online</div>
+      </div>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-btns" id="quickBtns">
+      <button class="quick-btn" onclick="quickMsg('Chcę umówić wizytę')">📅 Umów wizytę</button>
+      <button class="quick-btn" onclick="quickMsg('Jakie są godziny otwarcia?')">🕐 Godziny otwarcia</button>
+      <button class="quick-btn" onclick="quickMsg('Ile kosztuje strzyżenie?')">✂️ Cennik</button>
+      <button class="quick-btn" onclick="quickMsg('Gdzie się znajdujecie?')">📍 Lokalizacja</button>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Napisz wiadomość..." maxlength="300">
+      <button class="chat-send" onclick="sendMessage()" title="Wyślij">➤</button>
+    </div>
+  </div>
+  <button class="chat-toggle" id="chatToggle" onclick="toggleChat()" title="Czat">
+    💬
+    <div class="chat-toggle-dot"></div>
+  </button>
+</div>
+</body>
+</html>
