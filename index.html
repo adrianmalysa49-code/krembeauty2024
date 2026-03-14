@@ -2807,10 +2807,31 @@ Gdy klient pyta o rezerwację, zawsze podaj link do Booksy. Bądź ciepła i pro
       const reply = data.reply || data.error || 'Przepraszam, spróbuj ponownie.';
       conversationHistory.push({ role: 'assistant', content: reply });
       addBotMessage(reply);
+      showBackToMenu();
     } catch (e) {
       removeTyping();
       addBotMessage('Przepraszam, wystąpił problem. Zadzwoń do nas: <a href="tel:+48532585508" style="color:var(--violet);font-weight:500;">532 585 508</a>');
+      showBackToMenu();
     }
+  }
+
+  function showBackToMenu() {
+    const quickBtns = document.getElementById('quickBtns');
+    // Remove existing back button if any
+    const existing = document.getElementById('backToMenuBtn');
+    if (existing) existing.remove();
+    // Create back button
+    const btn = document.createElement('button');
+    btn.id = 'backToMenuBtn';
+    btn.className = 'quick-btn';
+    btn.style.cssText = 'width:100%;text-align:center;margin-top:4px;opacity:0.8;';
+    btn.innerHTML = '← Wróć do menu';
+    btn.onclick = function() {
+      quickBtns.style.display = 'flex';
+      btn.remove();
+    };
+    chatMessages.appendChild(btn);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
   function quickMsg(text) {
