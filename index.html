@@ -1990,15 +1990,25 @@
 
     <div class="service-card fade-in" onclick="goToTab('manicure')" style="animation-delay:0.3s;cursor:pointer;">
       <div class="service-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 14.06 8.5 20 7.06 14.06 1 12l6.06-2.06L8.5 4l1.44 5.94L16 12z"/><path d="M18 5.5 18.7 8 21 8.7 18.7 9.4 18 12l-.7-2.6L15 8.7 17.3 8z"/></svg></div>
-      <div class="service-card-name">Manicure & Pedicure</div>
-      <p class="service-card-desc">Manicure klasyczny, hybrydowy, japoński, przedłużanie paznokci żelowe, poligiel, pedicure SPA.</p>
+      <div class="service-card-name">Manicure</div>
+      <p class="service-card-desc">Manicure klasyczny, hybrydowy, japoński, przedłużanie i wzmacnianie paznokci żelem oraz poligielem.</p>
       <div>
         <div class="service-card-from">od</div>
         <div class="service-card-price">95 zł</div>
       </div>
     </div>
 
-    <div class="service-card fade-in" onclick="goToTab('brwi')" style="animation-delay:0.4s;cursor:pointer;">
+    <div class="service-card fade-in" onclick="goToTab('pedicure')" style="animation-delay:0.4s;cursor:pointer;">
+      <div class="service-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg></div>
+      <div class="service-card-name">Pedicure</div>
+      <p class="service-card-desc">Pedicure klasyczny, hybrydowy ze SPA, opracowanie paznokci i stóp — pełna pielęgnacja i komfort.</p>
+      <div>
+        <div class="service-card-from">od</div>
+        <div class="service-card-price">100 zł</div>
+      </div>
+    </div>
+
+    <div class="service-card fade-in" onclick="goToTab('brwi')" style="animation-delay:0.5s;cursor:pointer;">
       <div class="service-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div>
       <div class="service-card-name">Brwi</div>
       <p class="service-card-desc">Henna brwi, henna pudrowa, laminacja brwi oraz regulacja — perfekcyjnie podkreślone i wymodelowane brwi.</p>
@@ -2008,7 +2018,7 @@
       </div>
     </div>
 
-    <div class="service-card fade-in" onclick="goToTab('pakiety')" style="animation-delay:0.5s;cursor:pointer;">
+    <div class="service-card fade-in" onclick="goToTab('pakiety')" style="animation-delay:0.6s;cursor:pointer;">
       <div class="service-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 14.06 8.5 20 7.06 14.06 1 12l6.06-2.06L8.5 4l1.44 5.94L16 12z"/><path d="M18 5.5 18.7 8 21 8.7 18.7 9.4 18 12l-.7-2.6L15 8.7 17.3 8z"/></svg></div>
       <div class="service-card-name">Pakiety & Pielęgnacja</div>
       <p class="service-card-desc">Odżywcze zabiegi dla włosów K18, peelingi dłoni i stóp, parafina, zabieg SPA oraz atrakcyjne pakiety usług.</p>
@@ -2046,7 +2056,7 @@
         <span class="tab-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px"><path d="M9.94 14.06 8.5 20 7.06 14.06 1 12l6.06-2.06L8.5 4l1.44 5.94L16 12z"/><path d="M18 5.5 18.7 8 21 8.7 18.7 9.4 18 12l-.7-2.6L15 8.7 17.3 8z"/></svg></span> Manicure
       </button>
       <button class="cennik-tab" onclick="showTab('pedicure')">
-        <span class="tab-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></span> Pedicure
+        <span class="tab-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg></span> Pedicure
       </button>
       <button class="cennik-tab" onclick="showTab('pakiety')">
         <span class="tab-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg></span> Pakiety
