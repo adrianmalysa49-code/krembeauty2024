@@ -128,6 +128,7 @@
   .lang-btn:hover { color: var(--violet); }
   .lang-btn.active { color: var(--violet); }
   .lang-sep { color: var(--text-soft); opacity: 0.45; font-size: 12px; }
+  .lang-switch-mobile { display: none; }
 
   /* ─── HERO ─── */
   .hero {
@@ -1132,6 +1133,9 @@
     nav { padding: 16px 24px; }
     .nav-links { display: none; }
     .mobile-menu-btn { display: flex; }
+    .lang-switch-mobile { display: inline-flex; align-items: center; gap: 2px; margin-left: auto; margin-right: 16px; }
+    .lang-switch-mobile .lang-btn { font-size: 13px; padding: 6px 8px; }
+    .nav-links .lang-switch { display: none; }
     section { padding: 80px 40px; }
     .book-banner { padding: 60px 40px; }
   }
@@ -1895,6 +1899,7 @@
     <li class="lang-switch"><button type="button" class="lang-btn" data-l="pl">PL</button><span class="lang-sep">/</span><button type="button" class="lang-btn" data-l="en">EN</button></li>
     <li><a href="tel:+48532585508" class="nav-cta">Zadzwoń</a></li>
   </ul>
+  <div class="lang-switch-mobile"><button type="button" class="lang-btn" data-l="pl">PL</button><span class="lang-sep">/</span><button type="button" class="lang-btn" data-l="en">EN</button></div>
   <button class="mobile-menu-btn" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
