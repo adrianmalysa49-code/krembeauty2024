@@ -1331,6 +1331,44 @@
     letter-spacing: 1px;
   }
 
+  .gallery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 1000px;
+    margin: 0 auto 40px;
+  }
+  .gallery-filter {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(232, 164, 192, 0.18);
+    padding: 9px 18px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: color 0.25s, border-color 0.25s, background 0.25s;
+    white-space: nowrap;
+  }
+  .gallery-filter:hover { color: white; border-color: var(--rose); }
+  .gallery-filter.active {
+    background: var(--gradient-main);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 6px 20px rgba(232, 164, 192, 0.25);
+  }
+  .gallery-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: rgba(255,255,255,0.45);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+
   /* Placeholder styling for when no real image */
   .gallery-placeholder {
     width: 100%;
@@ -1373,6 +1411,9 @@
   @media (max-width: 700px) {
     #galeria { padding: 60px 24px; }
     .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .gallery-filters { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+    .gallery-filters::-webkit-scrollbar { display: none; }
+    .gallery-filter { flex: 0 0 auto; font-size: 12px; padding: 8px 14px; }
   }
 
   /* ─── REVIEWS PANEL ─── */
@@ -2358,158 +2399,208 @@
     <h2 class="section-title">Galeria <em>realizacji</em></h2>
   </div>
 
-  <div class="gallery-grid">
-
-    <!-- Zdjęcie 1 –  -->
-    <div class="gallery-item  fade-in">
-            <img src="images/IMG_5752.jpg" alt="Koloryzacja różowa" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Koloryzacja</span>
-      </div>
-    </div>
-
-    <!-- Zdjęcie 2 -->
-    <div class="gallery-item fade-in">
-            <img src="images/IMG_5751.jpg" alt="Strzyżenie blond bob" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Strzyżenie & Stylizacja</span>
-      </div>
-    </div>
-
-    <!-- Zdjęcie 3 -->
-    <div class="gallery-item fade-in">
-            <img src="images/IMG_5740.jpg" alt="Manicure nude" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Manicure</span>
-      </div>
-    </div>
-
-
-
-    <!-- Zdjęcie 5 -->
-    <div class="gallery-item fade-in">
-            <img src="images/IMG_5750.jpg" alt="Manicure fioletowy" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Manicure Hybrydowy</span>
-      </div>
-    </div>
-
-    <!-- Zdjęcie 6 -->
-    <div class="gallery-item fade-in">
-            <img src="images/IMG_5748.jpg" alt="Balayage długie fale" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Balayage & Fale</span>
-      </div>
-    </div>
-
-    <!-- Zdjęcie 6b -->
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_4257-2.jpg" alt="Przed i po prostowanie keratyna ciemne włosy" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Przed & Po – Prostowanie</span>
-      </div>
-    </div>
-
+  <div class="gallery-filters">
+    <button class="gallery-filter active" data-filter="blond">Blond</button>
+    <button class="gallery-filter" data-filter="airtouch">Air Touch</button>
+    <button class="gallery-filter" data-filter="balayage">Balayage</button>
+    <button class="gallery-filter" data-filter="ondulacja">Trwała ondulacja</button>
+    <button class="gallery-filter" data-filter="strzyzenie-d">Strzyżenie damskie</button>
+    <button class="gallery-filter" data-filter="strzyzenie-m">Strzyżenie męskie</button>
+    <button class="gallery-filter" data-filter="kolory">Kolory jednolite</button>
+    <button class="gallery-filter" data-filter="kolory-m">Koloryzacja mężczyzn</button>
+    <button class="gallery-filter" data-filter="ondulacja-m">Trwała ondulacja mężczyzn</button>
   </div>
 
-
-  <div class="gallery-grid gallery-grid-2" style="margin-top:0;">
-
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_5746.jpg" alt="Przed i po balayage" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Przed & Po – Balayage</span>
-      </div>
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="gallery-item fade-in" data-cat="blond">
+      <img src="images/IMG_4389.jpg" alt="Koloryzacja blond — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Blond</span></div>
     </div>
-
-
-
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_5739.jpg" alt="Strzyżenie męskie kręcone" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Strzyżenie Męskie</span>
-      </div>
+    <div class="gallery-item fade-in" data-cat="blond">
+      <img src="images/IMG_4392.jpg" alt="Tonowanie blond — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Blond</span></div>
     </div>
-
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_5747.jpg" alt="Pedicure czarny" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Pedicure</span>
-      </div>
+    <div class="gallery-item fade-in" data-cat="blond">
+      <img src="images/IMG_9141.jpg" alt="Stylizacja blond — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Blond</span></div>
     </div>
-
-
-    <!-- Zdjęcie 11 -->
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_4387.jpg" alt="Przed i po keratynowe prostowanie" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Przed & Po – Keratyna</span>
-      </div>
+    <div class="gallery-item fade-in" data-cat="airtouch">
+      <img src="images/IMG_4391.jpg" alt="Air Touch rozjaśnianie — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Air Touch</span></div>
     </div>
-
-    <!-- Zdjęcie 12 -->
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_4389.jpg" alt="Przed i po koloryzacja blond" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Przed & Po – Koloryzacja</span>
-      </div>
+    <div class="gallery-item fade-in" data-cat="balayage">
+      <img src="images/IMG_5748.jpg" alt="Balayage długie fale — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Balayage</span></div>
     </div>
-
-    <!-- Zdjęcie 13 -->
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_4391.jpg" alt="Przed i po rozjaśnianie" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Przed & Po – Rozjaśnianie</span>
-      </div>
+    <div class="gallery-item fade-in" data-cat="balayage">
+      <img src="images/IMG_5746.jpg" alt="Balayage przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Balayage</span></div>
     </div>
-
-    <!-- Zdjęcie 14 -->
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_4261.jpg" alt="Trwała ondulacja" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Trwała Ondulacja</span>
-      </div>
+    <div class="gallery-item fade-in" data-cat="balayage">
+      <img src="images/IMG_4390.jpg" alt="Balayage fale glamour — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Balayage</span></div>
     </div>
-
-    <!-- Zdjęcie 15 -->
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_4392.jpg" alt="Przed i po tonowanie" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Przed & Po – Tonowanie</span>
-      </div>
+    <div class="gallery-item fade-in" data-cat="balayage">
+      <img src="images/IMG_4269.jpg" alt="Balayage fale — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Balayage</span></div>
     </div>
-
-    <!-- Zdjęcie 16 -->
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_4390.jpg" alt="Balayage fale glamour" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Balayage & Fale Glamour</span>
-      </div>
+    <div class="gallery-item fade-in" data-cat="ondulacja">
+      <img src="images/IMG_4261.jpg" alt="Trwała ondulacja — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Trwała ondulacja</span></div>
     </div>
-
-    <!-- Zdjęcie 17 -->
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_9141.jpg" alt="Stylizacja blond długie włosy" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Stylizacja Blond</span>
-      </div>
+    <div class="gallery-item fade-in" data-cat="strzyzenie-d">
+      <img src="images/IMG_5751.jpg" alt="Strzyżenie damskie blond bob — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Strzyżenie damskie</span></div>
     </div>
-
-    <!-- Zdjęcie 18 -->
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_4268.jpg" alt="Przed i po strzyżenie" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Przed & Po – Strzyżenie</span>
-      </div>
+    <div class="gallery-item fade-in" data-cat="strzyzenie-d">
+      <img src="images/IMG_4268.jpg" alt="Strzyżenie damskie — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Strzyżenie damskie</span></div>
     </div>
-
-    <!-- Zdjęcie 19 -->
-    <div class="gallery-item fade-in">
-      <img src="images/IMG_4269.jpg" alt="Przed i po balayage fale" loading="lazy">
-      <div class="gallery-item-overlay">
-        <span class="gallery-item-label">Przed & Po – Balayage</span>
-      </div>
+    <div class="gallery-item fade-in" data-cat="strzyzenie-m">
+      <img src="images/IMG_5739.jpg" alt="Strzyżenie męskie — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Strzyżenie męskie</span></div>
     </div>
+    <div class="gallery-item fade-in" data-cat="kolory">
+      <img src="images/IMG_5752.jpg" alt="Koloryzacja różowa — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Kolory jednolite</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="kolory">
+      <img src="images/IMG_4387.jpg" alt="Koloryzacja miedziana — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Kolory jednolite</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="blond">
+      <img src="images/blond-01.jpg" alt="Koloryzacja blond — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Blond</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="blond">
+      <img src="images/blond-02.jpg" alt="Koloryzacja blond przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Blond</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="blond">
+      <img src="images/blond-03.jpg" alt="Platynowy blond — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Blond</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="airtouch">
+      <img src="images/airtouch-01.jpg" alt="Air Touch blond — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Air Touch</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="airtouch">
+      <img src="images/airtouch-02.jpg" alt="Air Touch popielaty blond — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Air Touch</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="airtouch">
+      <img src="images/airtouch-03.jpg" alt="Air Touch rozjaśnianie przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Air Touch</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="balayage">
+      <img src="images/balayage-01.jpg" alt="Balayage bronde fale — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Balayage</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="kolory">
+      <img src="images/kolory-01.jpg" alt="Fioletowa koloryzacja — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Kolory jednolite</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="strzyzenie-d">
+      <img src="images/strzyzenie-d-01.jpg" alt="Strzyżenie damskie długie cieniowane — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Strzyżenie damskie</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="strzyzenie-d">
+      <img src="images/strzyzenie-d-02.jpg" alt="Strzyżenie damskie bob — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Strzyżenie damskie</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="strzyzenie-d">
+      <img src="images/strzyzenie-d-03.jpg" alt="Strzyżenie damskie krótki bob — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Strzyżenie damskie</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="strzyzenie-d">
+      <img src="images/strzyzenie-d-04.jpg" alt="Strzyżenie damskie ciemny bob — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Strzyżenie damskie</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="strzyzenie-d">
+      <img src="images/strzyzenie-d-05.jpg" alt="Strzyżenie damskie bob — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Strzyżenie damskie</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="ondulacja">
+      <img src="images/ondulacja-01.jpg" alt="Trwała ondulacja przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Trwała ondulacja</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="ondulacja-m">
+      <img src="images/ondulacja-m-01.jpg" alt="Trwała ondulacja męska przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Trwała ondulacja mężczyzn</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="airtouch">
+      <img src="images/airtouch-04.jpg" alt="Air Touch platynowy blond przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Air Touch</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="airtouch">
+      <img src="images/airtouch-05.jpg" alt="Air Touch beżowy blond przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Air Touch</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="airtouch">
+      <img src="images/airtouch-06.jpg" alt="Air Touch kremowy blond przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Air Touch</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="airtouch">
+      <img src="images/airtouch-07.jpg" alt="Air Touch chłodny blond przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Air Touch</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="airtouch">
+      <img src="images/airtouch-08.jpg" alt="Air Touch beżowy blond — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Air Touch</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="airtouch">
+      <img src="images/airtouch-09.jpg" alt="Air Touch przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Air Touch</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="balayage">
+      <img src="images/balayage-02.jpg" alt="Balayage bronde przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Balayage</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="balayage">
+      <img src="images/balayage-03.jpg" alt="Balayage rozjaśnienie przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Balayage</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="balayage">
+      <img src="images/balayage-04.jpg" alt="Balayage beżowe fale przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Balayage</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="balayage">
+      <img src="images/balayage-05.jpg" alt="Balayage chłodny bronde przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Balayage</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="balayage">
+      <img src="images/balayage-06.jpg" alt="Balayage bronde fale — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Balayage</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="balayage">
+      <img src="images/balayage-07.jpg" alt="Balayage blond fale glamour — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Balayage</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="blond">
+      <img src="images/blond-04.jpg" alt="Rozjaśnienie do blond przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Blond</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="blond">
+      <img src="images/blond-05.jpg" alt="Beżowy blond przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Blond</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="blond">
+      <img src="images/blond-06.jpg" alt="Beżowo-różowy blond przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Blond</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="blond">
+      <img src="images/blond-07.jpg" alt="Beżowy blond przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Blond</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="blond">
+      <img src="images/blond-08.jpg" alt="Naturalny blond fale przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Blond</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="kolory">
+      <img src="images/kolory-02.jpg" alt="Brązowa koloryzacja przed i po — realizacja Krem Beauty" loading="lazy">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Kolory jednolite</span></div>
+    </div>
+    <div class="gallery-empty" id="galleryEmpty" style="display:none;">Wkrótce więcej realizacji</div>
   </div>
   <a href="https://www.instagram.com/krem.beautykrakow?igsh=dTg4anJrYjlud3o0" target="_blank" class="gallery-ig-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-3px;margin-right:6px"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Zobacz więcej realizacji na Instagramie @krem.beautykrakow →</a>
 </section>
@@ -2683,24 +2774,42 @@
     lightboxLabel.textContent = galleryImages[currentIndex].label;
   }
 
-  document.querySelectorAll('.gallery-item').forEach((item, index) => {
-    const img = item.querySelector('img');
-    const label = item.querySelector('.gallery-item-label');
-    if (img) {
-      galleryImages.push({ src: img.src, label: label ? label.textContent : '' });
-      item.addEventListener('click', () => openLightbox(galleryImages.length - (document.querySelectorAll('.gallery-item').length - index)));
-    }
+  const galleryFilterBtns = document.querySelectorAll('.gallery-filter');
+  const galleryEmpty = document.getElementById('galleryEmpty');
+  const galleryAllItems = Array.from(document.querySelectorAll('#galleryGrid .gallery-item'));
+
+  function rebuildGalleryList() {
+    galleryImages = [];
+    galleryAllItems.forEach((it) => {
+      if (it.style.display !== 'none') {
+        const img = it.querySelector('img');
+        const label = it.querySelector('.gallery-item-label');
+        galleryImages.push({ src: img.src, label: label ? label.textContent : '', el: it });
+      }
+    });
+  }
+
+  function applyGalleryFilter(cat) {
+    galleryFilterBtns.forEach((b) => b.classList.toggle('active', b.getAttribute('data-filter') === cat));
+    let shown = 0;
+    galleryAllItems.forEach((it) => {
+      const match = (cat === 'all' || it.getAttribute('data-cat') === cat);
+      it.style.display = match ? '' : 'none';
+      if (match) shown++;
+    });
+    if (galleryEmpty) galleryEmpty.style.display = (shown === 0) ? '' : 'none';
+    rebuildGalleryList();
+  }
+
+  galleryFilterBtns.forEach((b) => b.addEventListener('click', () => applyGalleryFilter(b.getAttribute('data-filter'))));
+  galleryAllItems.forEach((it) => {
+    it.addEventListener('click', () => {
+      const idx = galleryImages.findIndex((g) => g.el === it);
+      if (idx >= 0) openLightbox(idx);
+    });
   });
 
-  // Rebuild properly
-  galleryImages = [];
-  document.querySelectorAll('.gallery-item img').forEach((img, i) => {
-    const label = img.closest('.gallery-item').querySelector('.gallery-item-label');
-    galleryImages.push({ src: img.src, label: label ? label.textContent : '' });
-    img.closest('.gallery-item').addEventListener('click', (function(idx) {
-      return function() { openLightbox(idx); };
-    })(i));
-  });
+  applyGalleryFilter(galleryFilterBtns[0].getAttribute('data-filter'));
 
   document.getElementById('lightboxClose').addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
   document.getElementById('lightboxPrev').addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
@@ -2952,9 +3061,9 @@ Gdy klient pyta o rezerwację, zawsze podaj link do Booksy. Bądź ciepła i pro
 
 <script>
 (function(){
-  const T = {"Usługi": "Services", "Cennik": "Pricing", "O nas": "About", "Galeria": "Gallery", "Kontakt": "Contact", "Zadzwoń": "Call us", "Salon Fryzjerski & Beauty • Kraków": "Hair & Beauty Salon • Kraków", "szczyt": "the height of", "Twojego stylu": "your style", "Twoje miejsce na mapie Krakowa — gdzie profesjonalizm spotyka się z pasją. Fryzjerstwo, koloryzacja, prostowanie włosów BIO, manicure, pedicure i pielęgnacja urody.": "Your spot on Kraków's map — where professionalism meets passion. Hairdressing, coloring, BIO hair straightening, manicure, pedicure, and beauty care.", "Umów wizytę": "Book an appointment", "Zobacz cennik →": "View pricing →", "Popularne zabiegi": "Popular treatments", "Strzyżenie damskie": "Women's haircut", "od 180 zł": "from 180 zł", "Balayage + tonowanie": "Balayage + toning", "od 480 zł": "from 480 zł", "od 95 zł": "from 95 zł", "Prostowanie włosów BIO": "BIO hair straightening", "od 750 zł": "from 750 zł", "Laminacja brwi": "Brow lamination", "od 80 zł": "from 80 zł", "lat doświadczenia": "years of experience", "w branży beauty": "in the beauty industry", "Przewiń": "Scroll", "Co oferujemy": "What we offer", "Kompleksowa pielęgnacja": "Complete beauty", "urody": "care", "Fryzjerstwo": "Hairdressing", "Strzyżenia, modelowanie, stylizacje okolicznościowe, fale hollywood i koloryzacja wykonywana z pasją i precyzją.": "Haircuts, styling, special-occasion looks, Hollywood waves, and coloring done with passion and precision.", "od": "from", "Koloryzacja": "Coloring", "Balayage, ombre, refleksy, tonowanie, rozjaśnianie, dekoloryzacja — każdy odcień dopasowany idealnie do Ciebie.": "Balayage, ombre, highlights, toning, lightening, and colour removal — every shade matched perfectly to you.", "Trwałe wygładzenie i wyprostowanie włosów metodą BIO — efekt lśniących, gładkich i zdrowych włosów. Wymagana konsultacja.": "Long-lasting smoothing and straightening with the BIO method — for shiny, smooth, healthy-looking hair. Consultation required.", "Manicure klasyczny, hybrydowy, japoński, przedłużanie i wzmacnianie paznokci żelem oraz poligielem.": "Classic, hybrid, and Japanese manicure, plus nail extensions and strengthening with gel and polygel.", "Pedicure klasyczny, hybrydowy ze SPA, opracowanie paznokci i stóp — pełna pielęgnacja i komfort.": "Classic and hybrid pedicure with SPA, plus nail and foot care — full pampering and comfort.", "Brwi": "Brows", "Henna brwi, henna pudrowa, laminacja brwi oraz regulacja — perfekcyjnie podkreślone i wymodelowane brwi.": "Brow henna, powder henna, brow lamination, and shaping — perfectly defined, well-shaped brows.", "Pakiety & Pielęgnacja": "Packages & Care", "Odżywcze zabiegi dla włosów K18, peelingi dłoni i stóp, parafina, zabieg SPA oraz atrakcyjne pakiety usług.": "Nourishing K18 hair treatments, hand and foot scrubs, paraffin, SPA treatment, and attractive service packages.", "Szczegółowy cennik": "Detailed pricing", "Przejrzyste": "Transparent", "ceny": "prices", "Wybierz kategorię, aby zobaczyć szczegółowe ceny usług. Ostateczna wycena może zależeć od długości i gęstości włosów.": "Choose a category to see detailed service prices. The final quote may depend on your hair length and thickness.", "Prostowanie BIO": "BIO Straightening", "Pakiety": "Packages", "Strzyżenia": "Haircuts", "Strzyżenie damskie (top-stylista)": "Women's haircut (top stylist)", "Strzyżenie (włosy kręcone)": "Haircut (curly hair)", "Podcięcie grzywki": "Fringe trim", "Strzyżenie dziecięce": "Children's haircut", "Strzyżenie męskie": "Men's haircut", "Zarost (broda)": "Facial hair (beard)", "od 70 zł": "from 70 zł", "Stylizacja i modelowanie": "Styling & blow-dry", "Modelowanie włosów": "Hair styling / blow-dry", "Próbna ślubna fryzura": "Trial bridal hairstyle", "Fryzura wieczorowa (fale)": "Evening hairstyle (waves)", "Fryzura okolicznościowa (upięcie)": "Special-occasion updo", "Fryzura ślubna": "Bridal hairstyle", "Fale hollywood": "Hollywood waves", "Pielęgnacja i regeneracja włosów": "Hair care & repair", "Odnowa włosów od Brae": "Brae hair renewal", "Pielęgnacja dla włosów K18": "K18 hair treatment", "Trwała ondulacja": "Permanent wave", "Trwała ondulacja dla mężczyzn": "Permanent wave for men", "Trwała ondulacja dla kobiet": "Permanent wave for women", "Kolor jednolity + modelowanie": "Single-tone colour + styling", "Refleks z tonowaniem": "Highlights with toning", "Airtouch korona": "Airtouch crown", "Estetyczna integracja siwizny": "Aesthetic grey blending", "Rozjaśnienie odrostu + tonowanie (do 2 cm)": "Root lightening + toning (up to 2 cm)", "Dekoloryzacja": "Colour removal", "Męska koloryzacja (płukanka)": "Men's colour rinse", "od 100 zł": "from 100 zł", "Rozjaśnianie włosów męskich": "Men's hair lightening", "Konsultacja przed wyrównaniem (obowiązkowa)": "Pre-treatment consultation (required)", "gratis": "free", "Bio prostowanie włosów (krótkie włosy)": "BIO hair straightening (short hair)", "Bio prostowanie włosów (długość do ramion)": "BIO hair straightening (shoulder length)", "Bio prostowanie włosów (długie włosy)": "BIO hair straightening (long hair)", "od 1150 zł": "from 1150 zł", "Henna brwi": "Brow henna", "Regulacja brwi (pęseta/wosk)": "Brow shaping (tweezers/wax)", "Henna brwi + regulacja": "Brow henna + shaping", "Henna pudrowa brwi": "Powder brow henna", "Henna pudrowa brwi z regulacją": "Powder brow henna with shaping", "Laminacja brwi (regulacja + farbowanie + botox)": "Brow lamination (shaping + tint + botox)", "Manicure klasyczny": "Classic manicure", "Manicure męski (higiena)": "Men's manicure (hygiene)", "Manicure japoński": "Japanese manicure", "Manicure hybrydowy (jednolity kolor)": "Hybrid manicure (single colour)", "Uzupełnianie paznokci żelem + hybryda": "Gel infill + hybrid", "Uzupełnianie paznokci poligiel + hybryda": "Polygel infill + hybrid", "Przedłużanie paznokci żelowe (S, M, L)": "Gel nail extensions (S, M, L)", "Rekonstrukcja obgryzionych paznokci": "Bitten-nail reconstruction", "Wzmacnianie naturalnej płytki żelem + hybryda": "Natural-nail strengthening with gel + hybrid", "Ściągnięcie hybrydy + manicure klasyczny": "Hybrid removal + classic manicure", "Ściągnięcie żelu + manicure klasyczny": "Gel removal + classic manicure", "Ściągnięcie żelu": "Gel removal", "Ściągnięcie hybrydy": "Hybrid removal", "Pedicure klasyczny": "Classic pedicure", "Pedicure męski": "Men's pedicure", "Pedicure hybrydowy ze SPA": "Hybrid pedicure with SPA", "Opracowanie paznokci (bez stóp) z odżywką": "Nail care (no feet) with conditioner", "Opracowanie paznokci (bez stóp) zwykły lakier": "Nail care (no feet) regular polish", "Opracowanie paznokci + hybryda (bez stóp)": "Nail care + hybrid (no feet)", "Ściągnięcie hybrydy + pedicure klasyczny": "Hybrid removal + classic pedicure", "Opracowanie stóp": "Foot care", "Manicure klasyczny + pedicure klasyczny": "Classic manicure + classic pedicure", "Uzupełnianie żelu + pedicure klasyczny": "Gel infill + classic pedicure", "Manicure hybrydowy + pedicure hybrydowy": "Hybrid manicure + hybrid pedicure", "Uzupełnianie żelu + pedicure hybrydowy": "Gel infill + hybrid pedicure", "Manicure japoński + pedicure japoński": "Japanese manicure + Japanese pedicure", "Pielęgnacja dłoni i stóp": "Hand & foot care", "Peeling dłoni": "Hand scrub", "Peeling stóp + maska": "Foot scrub + mask", "Peeling dłoni + stopy + maska": "Hand + foot scrub + mask", "Parafina na dłonie": "Paraffin for hands", "Parafina na stopy": "Paraffin for feet", "Parafina na dłonie + stopy": "Paraffin for hands + feet", "Zabieg SPA na stopy": "SPA treatment for feet", "Opinie Google": "Google Reviews", "„Do tego salonu dojeżdżam z innego miasta, bo pracują tu prawdziwi profesjonaliści! Specjalne podziękowania dla Natalii Savki.\"": "“I travel from another city to this salon because true professionals work here! Special thanks to Natalia Savka.”", "„Pani Ilona doradziła mi tak genialnie, że w nowej fryzurze wręcz poczułam się bardziej sobą. Perfekcyjne cięcie i koloryzacja sprawiają, że włosy układają się świetnie. Gorąco polecam!\"": "“Ilona gave me such brilliant advice that my new hairstyle made me feel more like myself. The perfect cut and colour make my hair sit beautifully. Highly recommend!”", "„Najlepsze strzyżenie i modelowanie, jakie miałam w Krakowie. Fryzjerka doskonale doradziła cięcie do kształtu twarzy, a fryzura pięknie układa się przez wiele dni. Wychodzę zawsze zadowolona!\"": "“The best haircut and styling I've had in Kraków. The stylist recommended the perfect cut for my face shape, and the hairstyle holds beautifully for days. I always leave happy!”", "Zobacz wszystkie opinie →": "See all reviews →", "Pasja do piękna": "A passion for beauty", "od lat": "for years", "Krem Beauty to miejsce, gdzie dbałość o każdy detal łączy się z ciepłą, przyjazną atmosferą. Nasz zespół specjalistów dba o to, abyś wychodziła od nas piękna, zadbana i pełna pewności siebie.": "Krem Beauty is a place where attention to every detail meets a warm, welcoming atmosphere. Our team of specialists makes sure you leave feeling beautiful, cared for, and full of confidence.", "Oferujemy kompleksową obsługę beauty — od fryzjerstwa i koloryzacji, przez prostowanie włosów BIO i stylizację brwi, aż po manicure, pedicure i pielęgnację. Wszystko pod jednym dachem, w samym sercu Krakowa.": "We offer complete beauty services — from hairdressing and coloring, through BIO hair straightening and brow styling, to manicure, pedicure, and care. All under one roof, in the very heart of Kraków.", "Regularnie szkoleni, śledzący najnowsze trendy": "Regularly trained, following the latest trends", "Doświadczeni styliści": "Experienced stylists", "Tylko sprawdzone, wysokiej jakości produkty": "Only trusted, high-quality products", "Profesjonalne kosmetyki": "Professional cosmetics", "Każdy klient traktowany wyjątkowo": "Every client treated as special", "Indywidualne podejście": "Individual approach", "Łącz usługi i oszczędzaj": "Combine services and save", "Atrakcyjne pakiety": "Attractive packages", "Nasza praca": "Our work", "realizacji": "projects", "Strzyżenie & Stylizacja": "Cut & Styling", "Manicure Hybrydowy": "Hybrid Manicure", "Balayage & Fale": "Balayage & Waves", "Przed & Po – Prostowanie": "Before & After – Straightening", "Przed & Po – Balayage": "Before & After – Balayage", "Strzyżenie Męskie": "Men's Haircut", "Przed & Po – Keratyna": "Before & After – Keratin", "Przed & Po – Koloryzacja": "Before & After – Coloring", "Przed & Po – Rozjaśnianie": "Before & After – Lightening", "Trwała Ondulacja": "Permanent Wave", "Przed & Po – Tonowanie": "Before & After – Toning", "Balayage & Fale Glamour": "Balayage & Glamour Waves", "Stylizacja Blond": "Blonde Styling", "Przed & Po – Strzyżenie": "Before & After – Haircut", "Zobacz więcej realizacji na Instagramie @krem.beautykrakow →": "See more of our work on Instagram @krem.beautykrakow →", "Zdjęcie 1 –": "Photo 1 –", "Zdjęcie 2": "Photo 2", "Zdjęcie 3": "Photo 3", "Zdjęcie 5": "Photo 5", "Zdjęcie 6": "Photo 6", "Zdjęcie 6b": "Photo 6b", "Zdjęcie 11": "Photo 11", "Zdjęcie 12": "Photo 12", "Zdjęcie 13": "Photo 13", "Zdjęcie 14": "Photo 14", "Zdjęcie 15": "Photo 15", "Zdjęcie 16": "Photo 16", "Zdjęcie 17": "Photo 17", "Zdjęcie 18": "Photo 18", "Zdjęcie 19": "Photo 19", "Nie czekaj dłużej": "Don't wait any longer", "Zarezerwuj wizytę": "Book your appointment", "już dziś": "today", "Zadzwoń teraz": "Call now", "Znajdź nas": "Find us", "& lokalizacja": "& location", "Chętnie odpowiemy na każde pytanie i pomożemy dobrać idealną usługę dla Ciebie.": "We're happy to answer any question and help you choose the perfect service.", "Adres": "Address", "Telefon": "Phone", "Godziny otwarcia": "Opening hours", "Pon–Sob": "Mon–Sat", "Niedziela": "Sunday", "Otwórz w Google Maps →": "Open in Google Maps →", "Salon fryzjerski i beauty w sercu Krakowa. Kompleksowa pielęgnacja urody — fryzjerstwo, koloryzacja, prostowanie włosów BIO, brwi, manicure i pedicure.": "A hair & beauty salon in the heart of Kraków. Complete beauty care — hairdressing, coloring, BIO hair straightening, brows, manicure, and pedicure.", "© 2026 Krem Beauty. Wszelkie prawa zastrzeżone.": "© 2026 Krem Beauty. All rights reserved.", "Jesteśmy online": "We're online", "Lokalizacja": "Location"};
+  const T = {"Wszystkie": "All", "Blond": "Blonde", "Kolory jednolite": "Solid colours", "Koloryzacja mężczyzn": "Men's coloring", "Trwała ondulacja mężczyzn": "Permanent wave (men)", "Wkrótce więcej realizacji": "More work coming soon", "Usługi": "Services", "Cennik": "Pricing", "O nas": "About", "Galeria": "Gallery", "Kontakt": "Contact", "Zadzwoń": "Call us", "Salon Fryzjerski & Beauty • Kraków": "Hair & Beauty Salon • Kraków", "szczyt": "the height of", "Twojego stylu": "your style", "Twoje miejsce na mapie Krakowa — gdzie profesjonalizm spotyka się z pasją. Fryzjerstwo, koloryzacja, prostowanie włosów BIO, manicure, pedicure i pielęgnacja urody.": "Your spot on Kraków's map — where professionalism meets passion. Hairdressing, coloring, BIO hair straightening, manicure, pedicure, and beauty care.", "Umów wizytę": "Book an appointment", "Zobacz cennik →": "View pricing →", "Popularne zabiegi": "Popular treatments", "Strzyżenie damskie": "Women's haircut", "od 180 zł": "from 180 zł", "Balayage + tonowanie": "Balayage + toning", "od 480 zł": "from 480 zł", "od 95 zł": "from 95 zł", "Prostowanie włosów BIO": "BIO hair straightening", "od 750 zł": "from 750 zł", "Laminacja brwi": "Brow lamination", "od 80 zł": "from 80 zł", "lat doświadczenia": "years of experience", "w branży beauty": "in the beauty industry", "Przewiń": "Scroll", "Co oferujemy": "What we offer", "Kompleksowa pielęgnacja": "Complete beauty", "urody": "care", "Fryzjerstwo": "Hairdressing", "Strzyżenia, modelowanie, stylizacje okolicznościowe, fale hollywood i koloryzacja wykonywana z pasją i precyzją.": "Haircuts, styling, special-occasion looks, Hollywood waves, and coloring done with passion and precision.", "od": "from", "Koloryzacja": "Coloring", "Balayage, ombre, refleksy, tonowanie, rozjaśnianie, dekoloryzacja — każdy odcień dopasowany idealnie do Ciebie.": "Balayage, ombre, highlights, toning, lightening, and colour removal — every shade matched perfectly to you.", "Trwałe wygładzenie i wyprostowanie włosów metodą BIO — efekt lśniących, gładkich i zdrowych włosów. Wymagana konsultacja.": "Long-lasting smoothing and straightening with the BIO method — for shiny, smooth, healthy-looking hair. Consultation required.", "Manicure klasyczny, hybrydowy, japoński, przedłużanie i wzmacnianie paznokci żelem oraz poligielem.": "Classic, hybrid, and Japanese manicure, plus nail extensions and strengthening with gel and polygel.", "Pedicure klasyczny, hybrydowy ze SPA, opracowanie paznokci i stóp — pełna pielęgnacja i komfort.": "Classic and hybrid pedicure with SPA, plus nail and foot care — full pampering and comfort.", "Brwi": "Brows", "Henna brwi, henna pudrowa, laminacja brwi oraz regulacja — perfekcyjnie podkreślone i wymodelowane brwi.": "Brow henna, powder henna, brow lamination, and shaping — perfectly defined, well-shaped brows.", "Pakiety & Pielęgnacja": "Packages & Care", "Odżywcze zabiegi dla włosów K18, peelingi dłoni i stóp, parafina, zabieg SPA oraz atrakcyjne pakiety usług.": "Nourishing K18 hair treatments, hand and foot scrubs, paraffin, SPA treatment, and attractive service packages.", "Szczegółowy cennik": "Detailed pricing", "Przejrzyste": "Transparent", "ceny": "prices", "Wybierz kategorię, aby zobaczyć szczegółowe ceny usług. Ostateczna wycena może zależeć od długości i gęstości włosów.": "Choose a category to see detailed service prices. The final quote may depend on your hair length and thickness.", "Prostowanie BIO": "BIO Straightening", "Pakiety": "Packages", "Strzyżenia": "Haircuts", "Strzyżenie damskie (top-stylista)": "Women's haircut (top stylist)", "Strzyżenie (włosy kręcone)": "Haircut (curly hair)", "Podcięcie grzywki": "Fringe trim", "Strzyżenie dziecięce": "Children's haircut", "Strzyżenie męskie": "Men's haircut", "Zarost (broda)": "Facial hair (beard)", "od 70 zł": "from 70 zł", "Stylizacja i modelowanie": "Styling & blow-dry", "Modelowanie włosów": "Hair styling / blow-dry", "Próbna ślubna fryzura": "Trial bridal hairstyle", "Fryzura wieczorowa (fale)": "Evening hairstyle (waves)", "Fryzura okolicznościowa (upięcie)": "Special-occasion updo", "Fryzura ślubna": "Bridal hairstyle", "Fale hollywood": "Hollywood waves", "Pielęgnacja i regeneracja włosów": "Hair care & repair", "Odnowa włosów od Brae": "Brae hair renewal", "Pielęgnacja dla włosów K18": "K18 hair treatment", "Trwała ondulacja": "Permanent wave", "Trwała ondulacja dla mężczyzn": "Permanent wave for men", "Trwała ondulacja dla kobiet": "Permanent wave for women", "Kolor jednolity + modelowanie": "Single-tone colour + styling", "Refleks z tonowaniem": "Highlights with toning", "Airtouch korona": "Airtouch crown", "Estetyczna integracja siwizny": "Aesthetic grey blending", "Rozjaśnienie odrostu + tonowanie (do 2 cm)": "Root lightening + toning (up to 2 cm)", "Dekoloryzacja": "Colour removal", "Męska koloryzacja (płukanka)": "Men's colour rinse", "od 100 zł": "from 100 zł", "Rozjaśnianie włosów męskich": "Men's hair lightening", "Konsultacja przed wyrównaniem (obowiązkowa)": "Pre-treatment consultation (required)", "gratis": "free", "Bio prostowanie włosów (krótkie włosy)": "BIO hair straightening (short hair)", "Bio prostowanie włosów (długość do ramion)": "BIO hair straightening (shoulder length)", "Bio prostowanie włosów (długie włosy)": "BIO hair straightening (long hair)", "od 1150 zł": "from 1150 zł", "Henna brwi": "Brow henna", "Regulacja brwi (pęseta/wosk)": "Brow shaping (tweezers/wax)", "Henna brwi + regulacja": "Brow henna + shaping", "Henna pudrowa brwi": "Powder brow henna", "Henna pudrowa brwi z regulacją": "Powder brow henna with shaping", "Laminacja brwi (regulacja + farbowanie + botox)": "Brow lamination (shaping + tint + botox)", "Manicure klasyczny": "Classic manicure", "Manicure męski (higiena)": "Men's manicure (hygiene)", "Manicure japoński": "Japanese manicure", "Manicure hybrydowy (jednolity kolor)": "Hybrid manicure (single colour)", "Uzupełnianie paznokci żelem + hybryda": "Gel infill + hybrid", "Uzupełnianie paznokci poligiel + hybryda": "Polygel infill + hybrid", "Przedłużanie paznokci żelowe (S, M, L)": "Gel nail extensions (S, M, L)", "Rekonstrukcja obgryzionych paznokci": "Bitten-nail reconstruction", "Wzmacnianie naturalnej płytki żelem + hybryda": "Natural-nail strengthening with gel + hybrid", "Ściągnięcie hybrydy + manicure klasyczny": "Hybrid removal + classic manicure", "Ściągnięcie żelu + manicure klasyczny": "Gel removal + classic manicure", "Ściągnięcie żelu": "Gel removal", "Ściągnięcie hybrydy": "Hybrid removal", "Pedicure klasyczny": "Classic pedicure", "Pedicure męski": "Men's pedicure", "Pedicure hybrydowy ze SPA": "Hybrid pedicure with SPA", "Opracowanie paznokci (bez stóp) z odżywką": "Nail care (no feet) with conditioner", "Opracowanie paznokci (bez stóp) zwykły lakier": "Nail care (no feet) regular polish", "Opracowanie paznokci + hybryda (bez stóp)": "Nail care + hybrid (no feet)", "Ściągnięcie hybrydy + pedicure klasyczny": "Hybrid removal + classic pedicure", "Opracowanie stóp": "Foot care", "Manicure klasyczny + pedicure klasyczny": "Classic manicure + classic pedicure", "Uzupełnianie żelu + pedicure klasyczny": "Gel infill + classic pedicure", "Manicure hybrydowy + pedicure hybrydowy": "Hybrid manicure + hybrid pedicure", "Uzupełnianie żelu + pedicure hybrydowy": "Gel infill + hybrid pedicure", "Manicure japoński + pedicure japoński": "Japanese manicure + Japanese pedicure", "Pielęgnacja dłoni i stóp": "Hand & foot care", "Peeling dłoni": "Hand scrub", "Peeling stóp + maska": "Foot scrub + mask", "Peeling dłoni + stopy + maska": "Hand + foot scrub + mask", "Parafina na dłonie": "Paraffin for hands", "Parafina na stopy": "Paraffin for feet", "Parafina na dłonie + stopy": "Paraffin for hands + feet", "Zabieg SPA na stopy": "SPA treatment for feet", "Opinie Google": "Google Reviews", "„Do tego salonu dojeżdżam z innego miasta, bo pracują tu prawdziwi profesjonaliści! Specjalne podziękowania dla Natalii Savki.\"": "“I travel from another city to this salon because true professionals work here! Special thanks to Natalia Savka.”", "„Pani Ilona doradziła mi tak genialnie, że w nowej fryzurze wręcz poczułam się bardziej sobą. Perfekcyjne cięcie i koloryzacja sprawiają, że włosy układają się świetnie. Gorąco polecam!\"": "“Ilona gave me such brilliant advice that my new hairstyle made me feel more like myself. The perfect cut and colour make my hair sit beautifully. Highly recommend!”", "„Najlepsze strzyżenie i modelowanie, jakie miałam w Krakowie. Fryzjerka doskonale doradziła cięcie do kształtu twarzy, a fryzura pięknie układa się przez wiele dni. Wychodzę zawsze zadowolona!\"": "“The best haircut and styling I've had in Kraków. The stylist recommended the perfect cut for my face shape, and the hairstyle holds beautifully for days. I always leave happy!”", "Zobacz wszystkie opinie →": "See all reviews →", "Pasja do piękna": "A passion for beauty", "od lat": "for years", "Krem Beauty to miejsce, gdzie dbałość o każdy detal łączy się z ciepłą, przyjazną atmosferą. Nasz zespół specjalistów dba o to, abyś wychodziła od nas piękna, zadbana i pełna pewności siebie.": "Krem Beauty is a place where attention to every detail meets a warm, welcoming atmosphere. Our team of specialists makes sure you leave feeling beautiful, cared for, and full of confidence.", "Oferujemy kompleksową obsługę beauty — od fryzjerstwa i koloryzacji, przez prostowanie włosów BIO i stylizację brwi, aż po manicure, pedicure i pielęgnację. Wszystko pod jednym dachem, w samym sercu Krakowa.": "We offer complete beauty services — from hairdressing and coloring, through BIO hair straightening and brow styling, to manicure, pedicure, and care. All under one roof, in the very heart of Kraków.", "Regularnie szkoleni, śledzący najnowsze trendy": "Regularly trained, following the latest trends", "Doświadczeni styliści": "Experienced stylists", "Tylko sprawdzone, wysokiej jakości produkty": "Only trusted, high-quality products", "Profesjonalne kosmetyki": "Professional cosmetics", "Każdy klient traktowany wyjątkowo": "Every client treated as special", "Indywidualne podejście": "Individual approach", "Łącz usługi i oszczędzaj": "Combine services and save", "Atrakcyjne pakiety": "Attractive packages", "Nasza praca": "Our work", "realizacji": "projects", "Strzyżenie & Stylizacja": "Cut & Styling", "Manicure Hybrydowy": "Hybrid Manicure", "Balayage & Fale": "Balayage & Waves", "Przed & Po – Prostowanie": "Before & After – Straightening", "Przed & Po – Balayage": "Before & After – Balayage", "Strzyżenie Męskie": "Men's Haircut", "Przed & Po – Keratyna": "Before & After – Keratin", "Przed & Po – Koloryzacja": "Before & After – Coloring", "Przed & Po – Rozjaśnianie": "Before & After – Lightening", "Trwała Ondulacja": "Permanent Wave", "Przed & Po – Tonowanie": "Before & After – Toning", "Balayage & Fale Glamour": "Balayage & Glamour Waves", "Stylizacja Blond": "Blonde Styling", "Przed & Po – Strzyżenie": "Before & After – Haircut", "Zobacz więcej realizacji na Instagramie @krem.beautykrakow →": "See more of our work on Instagram @krem.beautykrakow →", "Zdjęcie 1 –": "Photo 1 –", "Zdjęcie 2": "Photo 2", "Zdjęcie 3": "Photo 3", "Zdjęcie 5": "Photo 5", "Zdjęcie 6": "Photo 6", "Zdjęcie 6b": "Photo 6b", "Zdjęcie 11": "Photo 11", "Zdjęcie 12": "Photo 12", "Zdjęcie 13": "Photo 13", "Zdjęcie 14": "Photo 14", "Zdjęcie 15": "Photo 15", "Zdjęcie 16": "Photo 16", "Zdjęcie 17": "Photo 17", "Zdjęcie 18": "Photo 18", "Zdjęcie 19": "Photo 19", "Nie czekaj dłużej": "Don't wait any longer", "Zarezerwuj wizytę": "Book your appointment", "już dziś": "today", "Zadzwoń teraz": "Call now", "Znajdź nas": "Find us", "& lokalizacja": "& location", "Chętnie odpowiemy na każde pytanie i pomożemy dobrać idealną usługę dla Ciebie.": "We're happy to answer any question and help you choose the perfect service.", "Adres": "Address", "Telefon": "Phone", "Godziny otwarcia": "Opening hours", "Pon–Sob": "Mon–Sat", "Niedziela": "Sunday", "Otwórz w Google Maps →": "Open in Google Maps →", "Salon fryzjerski i beauty w sercu Krakowa. Kompleksowa pielęgnacja urody — fryzjerstwo, koloryzacja, prostowanie włosów BIO, brwi, manicure i pedicure.": "A hair & beauty salon in the heart of Kraków. Complete beauty care — hairdressing, coloring, BIO hair straightening, brows, manicure, and pedicure.", "© 2026 Krem Beauty. Wszelkie prawa zastrzeżone.": "© 2026 Krem Beauty. All rights reserved.", "Jesteśmy online": "We're online", "Lokalizacja": "Location"};
   const ATTR = {"Napisz wiadomość...": "Type a message...", "Wyślij": "Send", "Czat": "Chat"};
-  const T_UK = {"Manicure": "Манікюр", "Pedicure": "Педикюр", "Manicure & Pedicure": "Манікюр & Педикюр", "Ombre": "Омбре", "Usługi": "Послуги", "Cennik": "Ціни", "O nas": "Про нас", "Galeria": "Галерея", "Kontakt": "Контакти", "Zadzwoń": "Зателефонувати", "Salon Fryzjerski & Beauty • Kraków": "Перукарський & Beauty салон • Краків", "szczyt": "вершина", "Twojego stylu": "твого стилю", "Twoje miejsce na mapie Krakowa — gdzie profesjonalizm spotyka się z pasją. Fryzjerstwo, koloryzacja, prostowanie włosów BIO, manicure, pedicure i pielęgnacja urody.": "Твоє місце на мапі Кракова — де професіоналізм зустрічається з пристрастю. Перукарські послуги, фарбування, BIO-випрямлення волосся, манікюр, педикюр і догляд за красою.", "Umów wizytę": "Записатися", "Zobacz cennik →": "Переглянути ціни →", "Popularne zabiegi": "Популярні послуги", "Strzyżenie damskie": "Жіноча стрижка", "od 180 zł": "від 180 zł", "Balayage + tonowanie": "Balayage + тонування", "od 480 zł": "від 480 zł", "od 95 zł": "від 95 zł", "Prostowanie włosów BIO": "BIO-випрямлення волосся", "od 750 zł": "від 750 zł", "Laminacja brwi": "Ламінування брів", "od 80 zł": "від 80 zł", "lat doświadczenia": "років досвіду", "w branży beauty": "у beauty-індустрії", "Przewiń": "Прокрутіть", "Co oferujemy": "Що ми пропонуємо", "Kompleksowa pielęgnacja": "Комплексний догляд", "urody": "за красою", "Fryzjerstwo": "Перукарські послуги", "Strzyżenia, modelowanie, stylizacje okolicznościowe, fale hollywood i koloryzacja wykonywana z pasją i precyzją.": "Стрижки, укладки, святкові зачіски, голлівудські локони та фарбування, виконані з пристрастю і точністю.", "od": "від", "Koloryzacja": "Фарбування", "Balayage, ombre, refleksy, tonowanie, rozjaśnianie, dekoloryzacja — każdy odcień dopasowany idealnie do Ciebie.": "Balayage, ombre, мелірування, тонування, освітлення, декольорування — кожен відтінок ідеально підібраний саме для вас.", "Trwałe wygładzenie i wyprostowanie włosów metodą BIO — efekt lśniących, gładkich i zdrowych włosów. Wymagana konsultacja.": "Тривале розгладження та випрямлення волосся методом BIO — ефект блискучого, гладкого та здорового волосся. Потрібна консультація.", "Manicure klasyczny, hybrydowy, japoński, przedłużanie i wzmacnianie paznokci żelem oraz poligielem.": "Класичний, гібридний та японський манікюр, а також нарощування і зміцнення нігтів гелем та полігелем.", "Pedicure klasyczny, hybrydowy ze SPA, opracowanie paznokci i stóp — pełna pielęgnacja i komfort.": "Класичний і гібридний педикюр зі SPA, обробка нігтів і стоп — повний догляд та комфорт.", "Brwi": "Брови", "Henna brwi, henna pudrowa, laminacja brwi oraz regulacja — perfekcyjnie podkreślone i wymodelowane brwi.": "Хна для брів, пудрова хна, ламінування брів та корекція — ідеально підкреслені й змодельовані брови.", "Pakiety & Pielęgnacja": "Пакети & Догляд", "Odżywcze zabiegi dla włosów K18, peelingi dłoni i stóp, parafina, zabieg SPA oraz atrakcyjne pakiety usług.": "Живильні процедури для волосся K18, пілінги рук і стоп, парафінотерапія, SPA-процедура та вигідні пакети послуг.", "Szczegółowy cennik": "Детальні ціни", "Przejrzyste": "Прозорі", "ceny": "ціни", "Wybierz kategorię, aby zobaczyć szczegółowe ceny usług. Ostateczna wycena może zależeć od długości i gęstości włosów.": "Оберіть категорію, щоб побачити детальні ціни на послуги. Остаточна вартість може залежати від довжини та густоти волосся.", "Prostowanie BIO": "BIO-випрямлення", "Pakiety": "Пакети", "Strzyżenia": "Стрижки", "Strzyżenie damskie (top-stylista)": "Жіноча стрижка (топ-стиліст)", "Strzyżenie (włosy kręcone)": "Стрижка (кучеряве волосся)", "Podcięcie grzywki": "Підстригання чубчика", "Strzyżenie dziecięce": "Дитяча стрижка", "Strzyżenie męskie": "Чоловіча стрижка", "Zarost (broda)": "Борода", "od 70 zł": "від 70 zł", "Stylizacja i modelowanie": "Укладка та моделювання", "Modelowanie włosów": "Укладка волосся", "Próbna ślubna fryzura": "Пробна весільна зачіска", "Fryzura wieczorowa (fale)": "Вечірня зачіска (локони)", "Fryzura okolicznościowa (upięcie)": "Святкова зачіска (пучок)", "Fryzura ślubna": "Весільна зачіска", "Fale hollywood": "Голлівудські локони", "Pielęgnacja i regeneracja włosów": "Догляд та відновлення волосся", "Odnowa włosów od Brae": "Відновлення волосся Brae", "Pielęgnacja dla włosów K18": "Догляд для волосся K18", "Trwała ondulacja": "Хімічна завивка", "Trwała ondulacja dla mężczyzn": "Хімічна завивка для чоловіків", "Trwała ondulacja dla kobiet": "Хімічна завивка для жінок", "Kolor jednolity + modelowanie": "Однотонне фарбування + укладка", "Refleks z tonowaniem": "Мелірування з тонуванням", "Airtouch korona": "Airtouch корона", "Estetyczna integracja siwizny": "Естетичне закрашування сивини", "Rozjaśnienie odrostu + tonowanie (do 2 cm)": "Освітлення відросту + тонування (до 2 см)", "Dekoloryzacja": "Декольорування", "Męska koloryzacja (płukanka)": "Чоловіче фарбування (тонування)", "od 100 zł": "від 100 zł", "Rozjaśnianie włosów męskich": "Освітлення чоловічого волосся", "Konsultacja przed wyrównaniem (obowiązkowa)": "Консультація перед процедурою (обов'язкова)", "gratis": "безкоштовно", "Bio prostowanie włosów (krótkie włosy)": "BIO-випрямлення волосся (коротке волосся)", "Bio prostowanie włosów (długość do ramion)": "BIO-випрямлення волосся (довжина до плечей)", "Bio prostowanie włosów (długie włosy)": "BIO-випрямлення волосся (довге волосся)", "od 1150 zł": "від 1150 zł", "Henna brwi": "Хна для брів", "Regulacja brwi (pęseta/wosk)": "Корекція брів (пінцет/віск)", "Henna brwi + regulacja": "Хна для брів + корекція", "Henna pudrowa brwi": "Пудрова хна для брів", "Henna pudrowa brwi z regulacją": "Пудрова хна для брів з корекцією", "Laminacja brwi (regulacja + farbowanie + botox)": "Ламінування брів (корекція + фарбування + ботокс)", "Manicure klasyczny": "Класичний манікюр", "Manicure męski (higiena)": "Чоловічий манікюр (гігієнічний)", "Manicure japoński": "Японський манікюр", "Manicure hybrydowy (jednolity kolor)": "Гібридний манікюр (однотонний)", "Uzupełnianie paznokci żelem + hybryda": "Корекція нігтів гелем + гібрид", "Uzupełnianie paznokci poligiel + hybryda": "Корекція нігтів полігелем + гібрид", "Przedłużanie paznokci żelowe (S, M, L)": "Нарощування нігтів гелем (S, M, L)", "Rekonstrukcja obgryzionych paznokci": "Реконструкція обгризених нігтів", "Wzmacnianie naturalnej płytki żelem + hybryda": "Зміцнення натуральної пластини гелем + гібрид", "Ściągnięcie hybrydy + manicure klasyczny": "Зняття гібриду + класичний манікюр", "Ściągnięcie żelu + manicure klasyczny": "Зняття гелю + класичний манікюр", "Ściągnięcie żelu": "Зняття гелю", "Ściągnięcie hybrydy": "Зняття гібриду", "Pedicure klasyczny": "Класичний педикюр", "Pedicure męski": "Чоловічий педикюр", "Pedicure hybrydowy ze SPA": "Гібридний педикюр зі SPA", "Opracowanie paznokci (bez stóp) z odżywką": "Обробка нігтів (без стоп) з доглядовим покриттям", "Opracowanie paznokci (bez stóp) zwykły lakier": "Обробка нігтів (без стоп) звичайний лак", "Opracowanie paznokci + hybryda (bez stóp)": "Обробка нігтів + гібрид (без стоп)", "Ściągnięcie hybrydy + pedicure klasyczny": "Зняття гібриду + класичний педикюр", "Opracowanie stóp": "Обробка стоп", "Manicure klasyczny + pedicure klasyczny": "Класичний манікюр + класичний педикюр", "Uzupełnianie żelu + pedicure klasyczny": "Корекція гелю + класичний педикюр", "Manicure hybrydowy + pedicure hybrydowy": "Гібридний манікюр + гібридний педикюр", "Uzupełnianie żelu + pedicure hybrydowy": "Корекція гелю + гібридний педикюр", "Manicure japoński + pedicure japoński": "Японський манікюр + японський педикюр", "Pielęgnacja dłoni i stóp": "Догляд за руками та стопами", "Peeling dłoni": "Пілінг рук", "Peeling stóp + maska": "Пілінг стоп + маска", "Peeling dłoni + stopy + maska": "Пілінг рук + стоп + маска", "Parafina na dłonie": "Парафінотерапія для рук", "Parafina na stopy": "Парафінотерапія для стоп", "Parafina na dłonie + stopy": "Парафінотерапія для рук + стоп", "Zabieg SPA na stopy": "SPA-процедура для стоп", "Opinie Google": "Відгуки Google", "„Do tego salonu dojeżdżam z innego miasta, bo pracują tu prawdziwi profesjonaliści! Specjalne podziękowania dla Natalii Savki.\"": "«Я приїжджаю до цього салону з іншого міста, бо тут працюють справжні професіонали! Особлива подяка Наталії Савці.»", "„Pani Ilona doradziła mi tak genialnie, że w nowej fryzurze wręcz poczułam się bardziej sobą. Perfekcyjne cięcie i koloryzacja sprawiają, że włosy układają się świetnie. Gorąco polecam!\"": "«Пані Ілона порадила мені настільки геніально, що в новій зачісці я відчула себе більше собою. Ідеальна стрижка та фарбування роблять волосся чудово укладеним. Дуже рекомендую!»", "„Najlepsze strzyżenie i modelowanie, jakie miałam w Krakowie. Fryzjerka doskonale doradziła cięcie do kształtu twarzy, a fryzura pięknie układa się przez wiele dni. Wychodzę zawsze zadowolona!\"": "«Найкраща стрижка та укладка, які я мала в Кракові. Перукарка ідеально підібрала стрижку до форми обличчя, а зачіска гарно тримається багато днів. Завжди виходжу задоволена!»", "Zobacz wszystkie opinie →": "Переглянути всі відгуки →", "Pasja do piękna": "Пристрасть до краси", "od lat": "роками", "Krem Beauty to miejsce, gdzie dbałość o każdy detal łączy się z ciepłą, przyjazną atmosferą. Nasz zespół specjalistów dba o to, abyś wychodziła od nas piękna, zadbana i pełna pewności siebie.": "Krem Beauty — це місце, де увага до кожної деталі поєднується з теплою, привітною атмосферою. Наша команда фахівців дбає про те, щоб ви виходили від нас красивими, доглянутими та впевненими в собі.", "Oferujemy kompleksową obsługę beauty — od fryzjerstwa i koloryzacji, przez prostowanie włosów BIO i stylizację brwi, aż po manicure, pedicure i pielęgnację. Wszystko pod jednym dachem, w samym sercu Krakowa.": "Ми пропонуємо комплексні beauty-послуги — від перукарських послуг і фарбування, через BIO-випрямлення волосся та стайлінг брів, до манікюру, педикюру й догляду. Усе під одним дахом, у самому серці Кракова.", "Regularnie szkoleni, śledzący najnowsze trendy": "Регулярно навчаються, стежать за новітніми трендами", "Doświadczeni styliści": "Досвідчені стилісти", "Tylko sprawdzone, wysokiej jakości produkty": "Лише перевірені, високоякісні продукти", "Profesjonalne kosmetyki": "Професійна косметика", "Każdy klient traktowany wyjątkowo": "До кожного клієнта — особливий підхід", "Indywidualne podejście": "Індивідуальний підхід", "Łącz usługi i oszczędzaj": "Поєднуйте послуги та заощаджуйте", "Atrakcyjne pakiety": "Вигідні пакети", "Nasza praca": "Наші роботи", "realizacji": "робіт", "Strzyżenie & Stylizacja": "Стрижка & Укладка", "Manicure Hybrydowy": "Гібридний манікюр", "Balayage & Fale": "Balayage & Локони", "Przed & Po – Prostowanie": "До & Після – Випрямлення", "Przed & Po – Balayage": "До & Після – Balayage", "Strzyżenie Męskie": "Чоловіча стрижка", "Przed & Po – Keratyna": "До & Після – Кератин", "Przed & Po – Koloryzacja": "До & Після – Фарбування", "Przed & Po – Rozjaśnianie": "До & Після – Освітлення", "Trwała Ondulacja": "Хімічна завивка", "Przed & Po – Tonowanie": "До & Після – Тонування", "Balayage & Fale Glamour": "Balayage & Гламурні локони", "Stylizacja Blond": "Блонд-стайлінг", "Przed & Po – Strzyżenie": "До & Після – Стрижка", "Zobacz więcej realizacji na Instagramie @krem.beautykrakow →": "Більше наших робіт в Instagram @krem.beautykrakow →", "Zdjęcie 1 –": "Фото 1 –", "Zdjęcie 2": "Фото 2", "Zdjęcie 3": "Фото 3", "Zdjęcie 5": "Фото 5", "Zdjęcie 6": "Фото 6", "Zdjęcie 6b": "Фото 6b", "Zdjęcie 11": "Фото 11", "Zdjęcie 12": "Фото 12", "Zdjęcie 13": "Фото 13", "Zdjęcie 14": "Фото 14", "Zdjęcie 15": "Фото 15", "Zdjęcie 16": "Фото 16", "Zdjęcie 17": "Фото 17", "Zdjęcie 18": "Фото 18", "Zdjęcie 19": "Фото 19", "Nie czekaj dłużej": "Не зволікайте", "Zarezerwuj wizytę": "Забронюйте візит", "już dziś": "вже сьогодні", "Zadzwoń teraz": "Зателефонувати зараз", "Znajdź nas": "Знайдіть нас", "& lokalizacja": "& розташування", "Chętnie odpowiemy na każde pytanie i pomożemy dobrać idealną usługę dla Ciebie.": "Із задоволенням відповімо на будь-яке запитання та допоможемо підібрати ідеальну послугу для вас.", "Adres": "Адреса", "Telefon": "Телефон", "Godziny otwarcia": "Години роботи", "Pon–Sob": "Пн–Сб", "Niedziela": "Неділя", "Otwórz w Google Maps →": "Відкрити в Google Maps →", "Salon fryzjerski i beauty w sercu Krakowa. Kompleksowa pielęgnacja urody — fryzjerstwo, koloryzacja, prostowanie włosów BIO, brwi, manicure i pedicure.": "Перукарський та beauty салон у серці Кракова. Комплексний догляд за красою — перукарські послуги, фарбування, BIO-випрямлення волосся, брови, манікюр і педикюр.", "© 2026 Krem Beauty. Wszelkie prawa zastrzeżone.": "© 2026 Krem Beauty. Усі права захищені.", "Jesteśmy online": "Ми онлайн", "Lokalizacja": "Розташування"};
+  const T_UK = {"Wszystkie": "Усі", "Blond": "Блонд", "Kolory jednolite": "Однотонне фарбування", "Koloryzacja mężczyzn": "Чоловіче фарбування", "Trwała ondulacja mężczyzn": "Хімічна завивка (чоловіки)", "Wkrótce więcej realizacji": "Скоро більше робіт", "Manicure": "Манікюр", "Pedicure": "Педикюр", "Manicure & Pedicure": "Манікюр & Педикюр", "Ombre": "Омбре", "Usługi": "Послуги", "Cennik": "Ціни", "O nas": "Про нас", "Galeria": "Галерея", "Kontakt": "Контакти", "Zadzwoń": "Зателефонувати", "Salon Fryzjerski & Beauty • Kraków": "Перукарський & Beauty салон • Краків", "szczyt": "вершина", "Twojego stylu": "твого стилю", "Twoje miejsce na mapie Krakowa — gdzie profesjonalizm spotyka się z pasją. Fryzjerstwo, koloryzacja, prostowanie włosów BIO, manicure, pedicure i pielęgnacja urody.": "Твоє місце на мапі Кракова — де професіоналізм зустрічається з пристрастю. Перукарські послуги, фарбування, BIO-випрямлення волосся, манікюр, педикюр і догляд за красою.", "Umów wizytę": "Записатися", "Zobacz cennik →": "Переглянути ціни →", "Popularne zabiegi": "Популярні послуги", "Strzyżenie damskie": "Жіноча стрижка", "od 180 zł": "від 180 zł", "Balayage + tonowanie": "Balayage + тонування", "od 480 zł": "від 480 zł", "od 95 zł": "від 95 zł", "Prostowanie włosów BIO": "BIO-випрямлення волосся", "od 750 zł": "від 750 zł", "Laminacja brwi": "Ламінування брів", "od 80 zł": "від 80 zł", "lat doświadczenia": "років досвіду", "w branży beauty": "у beauty-індустрії", "Przewiń": "Прокрутіть", "Co oferujemy": "Що ми пропонуємо", "Kompleksowa pielęgnacja": "Комплексний догляд", "urody": "за красою", "Fryzjerstwo": "Перукарські послуги", "Strzyżenia, modelowanie, stylizacje okolicznościowe, fale hollywood i koloryzacja wykonywana z pasją i precyzją.": "Стрижки, укладки, святкові зачіски, голлівудські локони та фарбування, виконані з пристрастю і точністю.", "od": "від", "Koloryzacja": "Фарбування", "Balayage, ombre, refleksy, tonowanie, rozjaśnianie, dekoloryzacja — każdy odcień dopasowany idealnie do Ciebie.": "Balayage, ombre, мелірування, тонування, освітлення, декольорування — кожен відтінок ідеально підібраний саме для вас.", "Trwałe wygładzenie i wyprostowanie włosów metodą BIO — efekt lśniących, gładkich i zdrowych włosów. Wymagana konsultacja.": "Тривале розгладження та випрямлення волосся методом BIO — ефект блискучого, гладкого та здорового волосся. Потрібна консультація.", "Manicure klasyczny, hybrydowy, japoński, przedłużanie i wzmacnianie paznokci żelem oraz poligielem.": "Класичний, гібридний та японський манікюр, а також нарощування і зміцнення нігтів гелем та полігелем.", "Pedicure klasyczny, hybrydowy ze SPA, opracowanie paznokci i stóp — pełna pielęgnacja i komfort.": "Класичний і гібридний педикюр зі SPA, обробка нігтів і стоп — повний догляд та комфорт.", "Brwi": "Брови", "Henna brwi, henna pudrowa, laminacja brwi oraz regulacja — perfekcyjnie podkreślone i wymodelowane brwi.": "Хна для брів, пудрова хна, ламінування брів та корекція — ідеально підкреслені й змодельовані брови.", "Pakiety & Pielęgnacja": "Пакети & Догляд", "Odżywcze zabiegi dla włosów K18, peelingi dłoni i stóp, parafina, zabieg SPA oraz atrakcyjne pakiety usług.": "Живильні процедури для волосся K18, пілінги рук і стоп, парафінотерапія, SPA-процедура та вигідні пакети послуг.", "Szczegółowy cennik": "Детальні ціни", "Przejrzyste": "Прозорі", "ceny": "ціни", "Wybierz kategorię, aby zobaczyć szczegółowe ceny usług. Ostateczna wycena może zależeć od długości i gęstości włosów.": "Оберіть категорію, щоб побачити детальні ціни на послуги. Остаточна вартість може залежати від довжини та густоти волосся.", "Prostowanie BIO": "BIO-випрямлення", "Pakiety": "Пакети", "Strzyżenia": "Стрижки", "Strzyżenie damskie (top-stylista)": "Жіноча стрижка (топ-стиліст)", "Strzyżenie (włosy kręcone)": "Стрижка (кучеряве волосся)", "Podcięcie grzywki": "Підстригання чубчика", "Strzyżenie dziecięce": "Дитяча стрижка", "Strzyżenie męskie": "Чоловіча стрижка", "Zarost (broda)": "Борода", "od 70 zł": "від 70 zł", "Stylizacja i modelowanie": "Укладка та моделювання", "Modelowanie włosów": "Укладка волосся", "Próbna ślubna fryzura": "Пробна весільна зачіска", "Fryzura wieczorowa (fale)": "Вечірня зачіска (локони)", "Fryzura okolicznościowa (upięcie)": "Святкова зачіска (пучок)", "Fryzura ślubna": "Весільна зачіска", "Fale hollywood": "Голлівудські локони", "Pielęgnacja i regeneracja włosów": "Догляд та відновлення волосся", "Odnowa włosów od Brae": "Відновлення волосся Brae", "Pielęgnacja dla włosów K18": "Догляд для волосся K18", "Trwała ondulacja": "Хімічна завивка", "Trwała ondulacja dla mężczyzn": "Хімічна завивка для чоловіків", "Trwała ondulacja dla kobiet": "Хімічна завивка для жінок", "Kolor jednolity + modelowanie": "Однотонне фарбування + укладка", "Refleks z tonowaniem": "Мелірування з тонуванням", "Airtouch korona": "Airtouch корона", "Estetyczna integracja siwizny": "Естетичне закрашування сивини", "Rozjaśnienie odrostu + tonowanie (do 2 cm)": "Освітлення відросту + тонування (до 2 см)", "Dekoloryzacja": "Декольорування", "Męska koloryzacja (płukanka)": "Чоловіче фарбування (тонування)", "od 100 zł": "від 100 zł", "Rozjaśnianie włosów męskich": "Освітлення чоловічого волосся", "Konsultacja przed wyrównaniem (obowiązkowa)": "Консультація перед процедурою (обов'язкова)", "gratis": "безкоштовно", "Bio prostowanie włosów (krótkie włosy)": "BIO-випрямлення волосся (коротке волосся)", "Bio prostowanie włosów (długość do ramion)": "BIO-випрямлення волосся (довжина до плечей)", "Bio prostowanie włosów (długie włosy)": "BIO-випрямлення волосся (довге волосся)", "od 1150 zł": "від 1150 zł", "Henna brwi": "Хна для брів", "Regulacja brwi (pęseta/wosk)": "Корекція брів (пінцет/віск)", "Henna brwi + regulacja": "Хна для брів + корекція", "Henna pudrowa brwi": "Пудрова хна для брів", "Henna pudrowa brwi z regulacją": "Пудрова хна для брів з корекцією", "Laminacja brwi (regulacja + farbowanie + botox)": "Ламінування брів (корекція + фарбування + ботокс)", "Manicure klasyczny": "Класичний манікюр", "Manicure męski (higiena)": "Чоловічий манікюр (гігієнічний)", "Manicure japoński": "Японський манікюр", "Manicure hybrydowy (jednolity kolor)": "Гібридний манікюр (однотонний)", "Uzupełnianie paznokci żelem + hybryda": "Корекція нігтів гелем + гібрид", "Uzupełnianie paznokci poligiel + hybryda": "Корекція нігтів полігелем + гібрид", "Przedłużanie paznokci żelowe (S, M, L)": "Нарощування нігтів гелем (S, M, L)", "Rekonstrukcja obgryzionych paznokci": "Реконструкція обгризених нігтів", "Wzmacnianie naturalnej płytki żelem + hybryda": "Зміцнення натуральної пластини гелем + гібрид", "Ściągnięcie hybrydy + manicure klasyczny": "Зняття гібриду + класичний манікюр", "Ściągnięcie żelu + manicure klasyczny": "Зняття гелю + класичний манікюр", "Ściągnięcie żelu": "Зняття гелю", "Ściągnięcie hybrydy": "Зняття гібриду", "Pedicure klasyczny": "Класичний педикюр", "Pedicure męski": "Чоловічий педикюр", "Pedicure hybrydowy ze SPA": "Гібридний педикюр зі SPA", "Opracowanie paznokci (bez stóp) z odżywką": "Обробка нігтів (без стоп) з доглядовим покриттям", "Opracowanie paznokci (bez stóp) zwykły lakier": "Обробка нігтів (без стоп) звичайний лак", "Opracowanie paznokci + hybryda (bez stóp)": "Обробка нігтів + гібрид (без стоп)", "Ściągnięcie hybrydy + pedicure klasyczny": "Зняття гібриду + класичний педикюр", "Opracowanie stóp": "Обробка стоп", "Manicure klasyczny + pedicure klasyczny": "Класичний манікюр + класичний педикюр", "Uzupełnianie żelu + pedicure klasyczny": "Корекція гелю + класичний педикюр", "Manicure hybrydowy + pedicure hybrydowy": "Гібридний манікюр + гібридний педикюр", "Uzupełnianie żelu + pedicure hybrydowy": "Корекція гелю + гібридний педикюр", "Manicure japoński + pedicure japoński": "Японський манікюр + японський педикюр", "Pielęgnacja dłoni i stóp": "Догляд за руками та стопами", "Peeling dłoni": "Пілінг рук", "Peeling stóp + maska": "Пілінг стоп + маска", "Peeling dłoni + stopy + maska": "Пілінг рук + стоп + маска", "Parafina na dłonie": "Парафінотерапія для рук", "Parafina na stopy": "Парафінотерапія для стоп", "Parafina na dłonie + stopy": "Парафінотерапія для рук + стоп", "Zabieg SPA na stopy": "SPA-процедура для стоп", "Opinie Google": "Відгуки Google", "„Do tego salonu dojeżdżam z innego miasta, bo pracują tu prawdziwi profesjonaliści! Specjalne podziękowania dla Natalii Savki.\"": "«Я приїжджаю до цього салону з іншого міста, бо тут працюють справжні професіонали! Особлива подяка Наталії Савці.»", "„Pani Ilona doradziła mi tak genialnie, że w nowej fryzurze wręcz poczułam się bardziej sobą. Perfekcyjne cięcie i koloryzacja sprawiają, że włosy układają się świetnie. Gorąco polecam!\"": "«Пані Ілона порадила мені настільки геніально, що в новій зачісці я відчула себе більше собою. Ідеальна стрижка та фарбування роблять волосся чудово укладеним. Дуже рекомендую!»", "„Najlepsze strzyżenie i modelowanie, jakie miałam w Krakowie. Fryzjerka doskonale doradziła cięcie do kształtu twarzy, a fryzura pięknie układa się przez wiele dni. Wychodzę zawsze zadowolona!\"": "«Найкраща стрижка та укладка, які я мала в Кракові. Перукарка ідеально підібрала стрижку до форми обличчя, а зачіска гарно тримається багато днів. Завжди виходжу задоволена!»", "Zobacz wszystkie opinie →": "Переглянути всі відгуки →", "Pasja do piękna": "Пристрасть до краси", "od lat": "роками", "Krem Beauty to miejsce, gdzie dbałość o każdy detal łączy się z ciepłą, przyjazną atmosferą. Nasz zespół specjalistów dba o to, abyś wychodziła od nas piękna, zadbana i pełna pewności siebie.": "Krem Beauty — це місце, де увага до кожної деталі поєднується з теплою, привітною атмосферою. Наша команда фахівців дбає про те, щоб ви виходили від нас красивими, доглянутими та впевненими в собі.", "Oferujemy kompleksową obsługę beauty — od fryzjerstwa i koloryzacji, przez prostowanie włosów BIO i stylizację brwi, aż po manicure, pedicure i pielęgnację. Wszystko pod jednym dachem, w samym sercu Krakowa.": "Ми пропонуємо комплексні beauty-послуги — від перукарських послуг і фарбування, через BIO-випрямлення волосся та стайлінг брів, до манікюру, педикюру й догляду. Усе під одним дахом, у самому серці Кракова.", "Regularnie szkoleni, śledzący najnowsze trendy": "Регулярно навчаються, стежать за новітніми трендами", "Doświadczeni styliści": "Досвідчені стилісти", "Tylko sprawdzone, wysokiej jakości produkty": "Лише перевірені, високоякісні продукти", "Profesjonalne kosmetyki": "Професійна косметика", "Każdy klient traktowany wyjątkowo": "До кожного клієнта — особливий підхід", "Indywidualne podejście": "Індивідуальний підхід", "Łącz usługi i oszczędzaj": "Поєднуйте послуги та заощаджуйте", "Atrakcyjne pakiety": "Вигідні пакети", "Nasza praca": "Наші роботи", "realizacji": "робіт", "Strzyżenie & Stylizacja": "Стрижка & Укладка", "Manicure Hybrydowy": "Гібридний манікюр", "Balayage & Fale": "Balayage & Локони", "Przed & Po – Prostowanie": "До & Після – Випрямлення", "Przed & Po – Balayage": "До & Після – Balayage", "Strzyżenie Męskie": "Чоловіча стрижка", "Przed & Po – Keratyna": "До & Після – Кератин", "Przed & Po – Koloryzacja": "До & Після – Фарбування", "Przed & Po – Rozjaśnianie": "До & Після – Освітлення", "Trwała Ondulacja": "Хімічна завивка", "Przed & Po – Tonowanie": "До & Після – Тонування", "Balayage & Fale Glamour": "Balayage & Гламурні локони", "Stylizacja Blond": "Блонд-стайлінг", "Przed & Po – Strzyżenie": "До & Після – Стрижка", "Zobacz więcej realizacji na Instagramie @krem.beautykrakow →": "Більше наших робіт в Instagram @krem.beautykrakow →", "Zdjęcie 1 –": "Фото 1 –", "Zdjęcie 2": "Фото 2", "Zdjęcie 3": "Фото 3", "Zdjęcie 5": "Фото 5", "Zdjęcie 6": "Фото 6", "Zdjęcie 6b": "Фото 6b", "Zdjęcie 11": "Фото 11", "Zdjęcie 12": "Фото 12", "Zdjęcie 13": "Фото 13", "Zdjęcie 14": "Фото 14", "Zdjęcie 15": "Фото 15", "Zdjęcie 16": "Фото 16", "Zdjęcie 17": "Фото 17", "Zdjęcie 18": "Фото 18", "Zdjęcie 19": "Фото 19", "Nie czekaj dłużej": "Не зволікайте", "Zarezerwuj wizytę": "Забронюйте візит", "już dziś": "вже сьогодні", "Zadzwoń teraz": "Зателефонувати зараз", "Znajdź nas": "Знайдіть нас", "& lokalizacja": "& розташування", "Chętnie odpowiemy na każde pytanie i pomożemy dobrać idealną usługę dla Ciebie.": "Із задоволенням відповімо на будь-яке запитання та допоможемо підібрати ідеальну послугу для вас.", "Adres": "Адреса", "Telefon": "Телефон", "Godziny otwarcia": "Години роботи", "Pon–Sob": "Пн–Сб", "Niedziela": "Неділя", "Otwórz w Google Maps →": "Відкрити в Google Maps →", "Salon fryzjerski i beauty w sercu Krakowa. Kompleksowa pielęgnacja urody — fryzjerstwo, koloryzacja, prostowanie włosów BIO, brwi, manicure i pedicure.": "Перукарський та beauty салон у серці Кракова. Комплексний догляд за красою — перукарські послуги, фарбування, BIO-випрямлення волосся, брови, манікюр і педикюр.", "© 2026 Krem Beauty. Wszelkie prawa zastrzeżone.": "© 2026 Krem Beauty. Усі права захищені.", "Jesteśmy online": "Ми онлайн", "Lokalizacja": "Розташування"};
   const ATTR_UK = {"Napisz wiadomość...": "Напишіть повідомлення...", "Wyślij": "Надіслати", "Czat": "Чат"};
   const META = {"title": {"pl": "Krem Beauty – Salon Fryzjerski & Beauty Kraków", "en": "Krem Beauty – Hair & Beauty Salon Kraków", "uk": "Krem Beauty – Перукарський & Beauty салон Краків"}};
   const GREET = { pl: 'Cześć! Witaj w Krem Beauty! W czym mogę Ci pomóc? Możesz zapytać o usługi, ceny, godziny otwarcia lub umówić wizytę.', en: 'Hi! Welcome to Krem Beauty! How can I help? You can ask about our services, prices, opening hours, or book an appointment.', uk: 'Вітаємо в Krem Beauty! Чим можу допомогти? Можете запитати про послуги, ціни, години роботи або записатися на візит.' };
