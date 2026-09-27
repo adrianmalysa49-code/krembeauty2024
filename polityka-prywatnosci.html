@@ -4,29 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
+<!-- ===== Google Consent Mode v2 (default) – musi być PRZED GA / Ads / GTM ===== -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  (function(){
+    var c = { ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', analytics_storage:'denied' };
+    try {
+      var s = JSON.parse(localStorage.getItem('krem_consent') || 'null');
+      if (s) {
+        c.analytics_storage  = s.analytics ? 'granted' : 'denied';
+        c.ad_storage         = s.ads ? 'granted' : 'denied';
+        c.ad_user_data       = s.ads ? 'granted' : 'denied';
+        c.ad_personalization = s.ads ? 'granted' : 'denied';
+      }
+    } catch(e){}
+    c.wait_for_update = 500;
+    gtag('consent', 'default', c);
+    gtag('set', 'url_passthrough', true);
+    gtag('set', 'ads_data_redaction', true);
+  })();
+</script>
+<script>(function(w,d,s,l,i){ if(!i || i.indexOf('XXXX')>-1) return;
+  w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6PCPDJEGD"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-E6PCPDJEGD');
+  /* gtag('config', 'AW-XXXXXXXXXX'); */
+</script>
 <title>Polityka prywatności – Krem Beauty</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --rose:#e8a4c0; --rose-light:#f5d6e6; --rose-pale:#fdf0f6;
-    --violet:#7c4b8a; --violet-deep:#4a2560; --cream:#fdf8fc;
-    --text:#3d2048; --text-soft:#7a5c8a;
-    --gradient-dark:linear-gradient(135deg,#4a2560 0%,#7c4b8a 100%);
-  }
+  :root{--rose:#e8a4c0;--rose-light:#f5d6e6;--rose-pale:#fdf0f6;--violet:#7c4b8a;--violet-deep:#4a2560;--violet-soft:#c5a0d4;--cream:#fdf8fc;--text:#3d2048;--text-soft:#7a5c8a;--gradient-dark:linear-gradient(135deg,#4a2560 0%,#7c4b8a 100%)}
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased}
-  a{color:var(--violet);text-decoration:none}
-  a:hover{text-decoration:underline}
+  a{color:var(--violet);text-decoration:none}a:hover{text-decoration:underline}
   .pp-nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 6vw;background:var(--rose-pale);border-bottom:1px solid rgba(124,75,138,.08);position:sticky;top:0;z-index:10;flex-wrap:wrap}
   .pp-nav img{height:44px;width:auto;object-fit:contain;display:block}
   .pp-nav-right{display:flex;align-items:center;gap:16px}
   .pp-nav a.back{font-size:14px;font-weight:500;color:var(--violet)}
   .pp-lang{display:inline-flex;align-items:center;gap:2px}
   .pp-lang button{background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;color:var(--text-soft);padding:4px 7px;border-radius:6px;transition:color .2s}
-  .pp-lang button:hover{color:var(--violet)}
-  .pp-lang button.active{color:var(--violet)}
+  .pp-lang button:hover,.pp-lang button.active{color:var(--violet)}
   .pp-lang .sep{color:var(--text-soft);opacity:.45;font-size:12px}
   .pp-hero{background:var(--gradient-dark);color:#fff;padding:56px 6vw 46px}
   .pp-hero .eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--rose-light);opacity:.9}
@@ -39,32 +64,49 @@
   .pp-wrap ul li{position:relative;padding-left:22px;margin:9px 0}
   .pp-wrap ul li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:50%;background:var(--rose)}
   .pp-wrap strong{color:var(--violet-deep)}
-  .contact-box{background:var(--rose-pale);border-radius:16px;padding:22px 24px;margin-top:14px}
-  .contact-box p{margin:5px 0}
+  .contact-box{background:var(--rose-pale);border-radius:16px;padding:22px 24px;margin-top:14px}.contact-box p{margin:5px 0}
   .pp-foot{background:var(--violet-deep);color:rgba(255,255,255,.75);text-align:center;padding:26px 6vw;font-size:13px}
-  .pp-foot a{color:var(--rose-light)}
+  .pp-foot a,.pp-foot button{color:var(--rose-light);background:none;border:none;cursor:pointer;font:inherit}
+  /* cookie banner */
+  .cc-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:3000;max-width:560px;margin:0 auto;background:#fff;border:1px solid var(--rose-light);border-radius:18px;box-shadow:0 20px 60px rgba(74,37,96,.28);padding:20px 22px;display:none}
+  .cc-banner.show{display:block}
+  .cc-text{font-size:12.5px;line-height:1.6;color:var(--text)}
+  .cc-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;justify-content:flex-end}
+  .cc-btn{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.5px;border-radius:40px;padding:11px 20px;cursor:pointer;transition:all .2s;border:1px solid transparent;white-space:nowrap}
+  .cc-ghost{background:#fff;color:var(--violet);border-color:var(--rose-light)}.cc-ghost:hover{border-color:var(--rose)}
+  .cc-primary{background:var(--gradient-dark);color:#fff;box-shadow:0 4px 16px rgba(124,75,138,.3)}
+  .cc-modal-overlay{position:fixed;inset:0;z-index:3100;background:rgba(42,16,64,.55);display:none;align-items:center;justify-content:center;padding:20px}
+  .cc-modal-overlay.show{display:flex}
+  .cc-modal{background:var(--cream);border-radius:20px;max-width:480px;width:100%;max-height:88vh;overflow-y:auto;padding:26px;box-shadow:0 30px 80px rgba(74,37,96,.35)}
+  .cc-modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .cc-modal-title{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--violet-deep)}
+  .cc-modal-close{background:none;border:none;font-size:20px;color:var(--text-soft);cursor:pointer;line-height:1}
+  .cc-cat{border-top:1px solid var(--rose-light);padding:16px 0}
+  .cc-cat-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .cc-cat-name{font-weight:600;color:var(--violet-deep);font-size:15px}
+  .cc-always{font-size:11px;color:var(--text-soft);letter-spacing:.5px}
+  .cc-cat-desc{font-size:12.5px;color:var(--text-soft);line-height:1.55;margin-top:6px}
+  .cc-switch{position:relative;display:inline-block;width:42px;height:24px;flex:0 0 auto}
+  .cc-switch input{opacity:0;width:0;height:0}
+  .cc-slider{position:absolute;inset:0;background:#d8c3e0;border-radius:24px;transition:.2s;cursor:pointer}
+  .cc-slider::before{content:"";position:absolute;height:18px;width:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+  .cc-switch input:checked + .cc-slider{background:var(--violet)}
+  .cc-switch input:checked + .cc-slider::before{transform:translateX(18px)}
+  .cc-modal-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;justify-content:flex-end}
 </style>
 </head>
 <body>
-
 <nav class="pp-nav">
   <a href="index.html" aria-label="Krem Beauty"><img src="images/logo.png" alt="Krem Beauty"></a>
   <div class="pp-nav-right">
     <a href="index.html" class="back" id="backLink">← Powrót na stronę główną</a>
-    <span class="pp-lang">
-      <button type="button" data-l="pl">PL</button><span class="sep">/</span><button type="button" data-l="en">EN</button><span class="sep">/</span><button type="button" data-l="uk">UA</button>
-    </span>
+    <span class="pp-lang"><button type="button" data-l="pl">PL</button><span class="sep">/</span><button type="button" data-l="en">EN</button><span class="sep">/</span><button type="button" data-l="uk">UA</button></span>
   </div>
 </nav>
-
 <section class="lang-content" data-lang="pl">
-  <header class="pp-hero">
-    <div class="eyebrow">Krem Beauty</div>
-    <h1>Polityka prywatności</h1>
-    <div class="updated">Ostatnia aktualizacja: 17 września 2026</div>
-  </header>
+  <header class="pp-hero"><div class="eyebrow">Krem Beauty</div><h1>Polityka prywatności</h1><div class="updated">Ostatnia aktualizacja: 27 września 2026</div></header>
   <main class="pp-wrap">
-    <p>Niniejsza polityka wyjaśnia, w jaki sposób przetwarzamy dane osobowe osób odwiedzających naszą stronę internetową oraz kontaktujących się z salonem <strong>Krem Beauty</strong>. Zależy nam na Twojej prywatności i przetwarzamy tylko te dane, które są rzeczywiście potrzebne.</p>
+    <p>Niniejsza polityka wyjaśnia, w jaki sposób przetwarzamy dane osobowe osób odwiedzających naszą stronę internetową oraz kontaktujących się z salonem <strong>Krem Beauty</strong>.</p>
 
     <h2>1. Administrator danych</h2>
     <p>Administratorem Twoich danych osobowych jest:</p>
@@ -75,71 +117,76 @@
     <p>E-mail: <a href="mailto:krembeauty2024@gmail.com">krembeauty2024@gmail.com</a></p>
     <p>NIP: 6762624788</p>
   </div>
-    <p>We wszystkich sprawach dotyczących Twoich danych osobowych możesz skontaktować się z nami, korzystając z danych powyżej.</p>
+    <p>We wszystkich sprawach dotyczących danych osobowych możesz skontaktować się z nami, korzystając z danych powyżej.</p>
 
     <h2>2. Jakie dane przetwarzamy i w jakim celu</h2>
     <ul>
-      <li><strong>Kontakt telefoniczny i umawianie wizyt.</strong> Jeśli do nas dzwonisz, przetwarzamy imię i numer telefonu, które podajesz — w celu umówienia i realizacji usługi oraz kontaktu zwrotnego. Rezerwacja online odbywa się przez zewnętrzny serwis <strong>Booksy</strong>, który jest odrębnym administratorem Twoich danych.</li>
-      <li><strong>Asystent (czat) na stronie.</strong> Przetwarzamy treść wiadomości, które wpisujesz w oknie czatu — w celu udzielenia odpowiedzi na pytania o usługi, ceny czy godziny otwarcia. Wiadomości są przesyłane do dostawcy technologii AI, <strong>Anthropic PBC</strong> (USA), w celu wygenerowania odpowiedzi. Nie przechowujemy tych rozmów na naszych serwerach. Prosimy, aby <strong>nie podawać w czacie danych wrażliwych</strong>, numerów dokumentów ani danych do płatności.</li>
-      <li><strong>Dane techniczne (logi serwera).</strong> Przy każdej wizycie dostawca hostingu automatycznie zapisuje m.in. adres IP, typ urządzenia i przeglądarki oraz datę i godzinę — w celu zapewnienia działania, stabilności i bezpieczeństwa strony.</li>
-      <li><strong>Czcionki Google.</strong> Strona pobiera czcionki z serwerów Google (Google Fonts), co może wiązać się z przekazaniem Twojego adresu IP do Google.</li>
+      <li><strong>Formularz kontaktowy.</strong> Przetwarzamy imię, dane kontaktowe (telefon lub e-mail) oraz treść wiadomości — wyłącznie w celu obsługi Twojego zapytania i kontaktu z Tobą. Nie wykorzystujemy tych danych do newslettera ani marketingu.</li>
+      <li><strong>Kontakt telefoniczny i rezerwacja wizyt.</strong> Imię i numer telefonu — w celu umówienia i realizacji usługi. Rezerwacja online odbywa się przez zewnętrzny serwis <strong>Booksy</strong> (odrębny administrator).</li>
+      <li><strong>Asystent (czat).</strong> Treść wiadomości wpisywanych w czacie — w celu udzielenia odpowiedzi. Wiadomości są przesyłane do dostawcy AI <strong>Anthropic PBC</strong> (USA). Prosimy nie podawać w czacie danych wrażliwych ani danych do płatności.</li>
+      <li><strong>Dane techniczne (logi).</strong> Adres IP, typ urządzenia i przeglądarki, data i godzina — automatycznie zapisywane przez dostawcę hostingu, w celu zapewnienia działania i bezpieczeństwa strony.</li>
+      <li><strong>Google Analytics 4</strong> (tylko za Twoją zgodą) — analiza ruchu i sposobu korzystania ze strony.</li>
+      <li><strong>Google Ads</strong> (tylko za Twoją zgodą) — pomiar skuteczności reklam i konwersji (np. kliknięcia w numer telefonu, wysłanie formularza).</li>
+      <li><strong>Czcionki Google.</strong> Strona pobiera czcionki z serwerów Google, co może wiązać się z przekazaniem adresu IP do Google.</li>
     </ul>
 
-    <h2>3. Podstawy prawne przetwarzania</h2>
-    <p>Dane przetwarzamy na podstawie RODO:</p>
+    <h2>3. Podstawy prawne</h2>
     <ul>
-      <li><strong>art. 6 ust. 1 lit. b</strong> — podjęcie działań na Twoje żądanie przed zawarciem umowy oraz realizacja usługi (kontakt, rezerwacja wizyty);</li>
-      <li><strong>art. 6 ust. 1 lit. f</strong> — nasz prawnie uzasadniony interes: obsługa zapytań przez czat, zapewnienie działania i bezpieczeństwa strony oraz ewentualna obrona przed roszczeniami.</li>
+      <li><strong>art. 6 ust. 1 lit. b RODO</strong> — obsługa zapytania z formularza/telefonu oraz działania zmierzające do zawarcia i realizacji usługi;</li>
+      <li><strong>art. 6 ust. 1 lit. f RODO</strong> — prawnie uzasadniony interes: zapewnienie działania i bezpieczeństwa strony, obsługa czatu, obrona przed roszczeniami;</li>
+      <li><strong>art. 6 ust. 1 lit. a RODO</strong> — Twoja zgoda na pliki analityczne (Google Analytics) i reklamowe (Google Ads); możesz ją w każdej chwili wycofać.</li>
     </ul>
 
-    <h2>4. Odbiorcy danych</h2>
-    <p>W zakresie niezbędnym do działania strony Twoje dane mogą być powierzane zaufanym dostawcom:</p>
+    <h2>4. Okres przechowywania</h2>
     <ul>
-      <li><strong>Vercel Inc.</strong> — hosting strony internetowej (USA);</li>
-      <li><strong>Anthropic PBC</strong> — obsługa asystenta (czatu) na stronie (USA);</li>
-      <li><strong>Google</strong> — czcionki (Google Fonts) oraz Mapy Google;</li>
-      <li><strong>Booksy</strong> — system rezerwacji online (jeśli z niego korzystasz);</li>
-      <li><strong>Meta Platforms</strong> — Instagram i Facebook: po kliknięciu w nasze linki przechodzisz do serwisów, które przetwarzają dane według własnych zasad.</li>
+      <li>dane z formularza i kontaktowe — przez czas niezbędny do obsługi zapytania oraz przez okres przedawnienia ewentualnych roszczeń;</li>
+      <li>logi techniczne — zgodnie z ustawieniami dostawcy hostingu;</li>
+      <li>wiadomości z czatu — nie są przez nas trwale przechowywane;</li>
+      <li>dane z narzędzi Google — zgodnie z ustawieniami retencji w Google Analytics/Ads.</li>
+    </ul>
+
+    <h2>5. Odbiorcy danych</h2>
+    <ul>
+      <li><strong>Vercel Inc.</strong> — hosting strony (USA);</li>
+      <li><strong>Anthropic PBC</strong> — asystent (czat) na stronie (USA);</li>
+      <li><strong>Google Ireland / Google LLC</strong> — Google Analytics, Google Ads, Google Tag Manager, czcionki, Mapy;</li>
+      <li><strong>Resend</strong> — wysyłka wiadomości z formularza kontaktowego (jeśli włączona);</li>
+      <li><strong>Booksy</strong> — rezerwacje online (jeśli z niego korzystasz);</li>
+      <li><strong>Meta Platforms</strong> — Instagram i Facebook (po kliknięciu naszych linków).</li>
     </ul>
     <p>Nie sprzedajemy Twoich danych osobowych.</p>
 
-    <h2>5. Przekazywanie danych poza EOG</h2>
-    <p>Część usług, z których korzystamy (Vercel, Anthropic, Google), ma siedzibę w Stanach Zjednoczonych, dlatego dane mogą być przekazywane poza Europejski Obszar Gospodarczy. Odbywa się to na podstawie zabezpieczeń przewidzianych w RODO — standardowych klauzul umownych i/lub programu Data Privacy Framework.</p>
+    <h2>6. Narzędzia Google (Analytics, Ads, Tag Manager)</h2>
+    <p><strong>Google Analytics 4</strong> pomaga nam zrozumieć, jak odwiedzający korzystają ze strony (statystyki ruchu, źródła wejść). <strong>Google Ads</strong> służy do mierzenia skuteczności naszych reklam i konwersji. <strong>Google Tag Manager</strong> to menedżer tagów, który zarządza uruchamianiem powyższych narzędzi. Narzędzia analityczne i reklamowe uruchamiamy <strong>dopiero po wyrażeniu przez Ciebie zgody</strong>. Do zarządzania zgodą stosujemy mechanizm <strong>Google Consent Mode v2</strong>, dzięki któremu Twój wybór jest technicznie przekazywany do Google Analytics i Google Ads.</p>
 
-    <h2>6. Okres przechowywania</h2>
+    <h2>7. Pliki cookies i zarządzanie zgodami</h2>
+    <p>Dzielimy pliki cookies i podobne technologie na kategorie:</p>
     <ul>
-      <li>dane kontaktowe i rezerwacyjne — przez czas niezbędny do realizacji usługi oraz przez okres przedawnienia ewentualnych roszczeń;</li>
-      <li>logi techniczne — przez okres wynikający z ustawień dostawcy hostingu;</li>
-      <li>wiadomości z czatu — nie są przez nas trwale przechowywane.</li>
+      <li><strong>Niezbędne</strong> — konieczne do działania strony (np. zapamiętanie języka i Twojej zgody). Zawsze aktywne.</li>
+      <li><strong>Analityczne</strong> — Google Analytics; uruchamiane wyłącznie za zgodą.</li>
+      <li><strong>Reklamowe</strong> — Google Ads; uruchamiane wyłącznie za zgodą.</li>
     </ul>
+    <p>Przy pierwszej wizycie wyświetlamy baner, na którym możesz zaakceptować wszystkie pliki cookies, odrzucić opcjonalne lub dostosować ustawienia. Swój wybór możesz <strong>w każdej chwili zmienić lub wycofać</strong>, klikając „Ustawienia cookies" w stopce strony.</p>
 
-    <h2>7. Pliki cookies i pamięć przeglądarki</h2>
-    <p>Strona <strong>nie stosuje plików cookies do celów marketingowych ani analitycznych</strong> i nie śledzi Twojej aktywności. Wykorzystuje jedynie pamięć lokalną przeglądarki (localStorage) do zapamiętania wybranego języka strony — te informacje pozostają na Twoim urządzeniu i nie są nam przesyłane. Możesz je w każdej chwili usunąć, czyszcząc dane przeglądarki.</p>
+    <h2>8. Przekazywanie danych poza EOG</h2>
+    <p>Część dostawców (Google, Vercel, Anthropic, Resend) ma siedzibę w USA, więc dane mogą być przekazywane poza Europejski Obszar Gospodarczy — na podstawie zabezpieczeń przewidzianych w RODO (standardowe klauzule umowne i/lub Data Privacy Framework).</p>
 
-    <h2>8. Twoje prawa</h2>
-    <p>Masz prawo do: dostępu do swoich danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, wniesienia sprzeciwu, przenoszenia danych oraz cofnięcia zgody. Przysługuje Ci również prawo wniesienia skargi do organu nadzorczego — <strong>Prezesa Urzędu Ochrony Danych Osobowych</strong> (ul. Stawki 2, 00-193 Warszawa).</p>
+    <h2>9. Twoje prawa</h2>
+    <p>Masz prawo do: dostępu do danych, sprostowania, usunięcia, ograniczenia przetwarzania, sprzeciwu, przenoszenia danych oraz cofnięcia zgody. Przysługuje Ci również skarga do <strong>Prezesa Urzędu Ochrony Danych Osobowych</strong> (ul. Stawki 2, 00-193 Warszawa).</p>
 
-    <h2>9. Dobrowolność podania danych</h2>
-    <p>Podanie danych jest dobrowolne, ale niezbędne do umówienia wizyty lub uzyskania odpowiedzi na zapytanie.</p>
+    <h2>10. Dobrowolność podania danych</h2>
+    <p>Podanie danych jest dobrowolne, ale niezbędne do obsługi zapytania lub umówienia wizyty.</p>
 
-    <h2>10. Zmiany polityki prywatności</h2>
-    <p>Możemy okresowo aktualizować niniejszą politykę. Aktualna wersja jest zawsze dostępna na tej stronie, wraz z datą ostatniej aktualizacji podaną na górze.</p>
+    <h2>11. Zmiany polityki</h2>
+    <p>Możemy okresowo aktualizować tę politykę. Aktualna wersja jest zawsze dostępna na tej stronie, z datą aktualizacji u góry.</p>
 
-    <div class="contact-box" style="margin-top:34px">
-      <p><strong>Kontakt w sprawie danych osobowych</strong></p>
-      <p>E-mail: <a href="mailto:krembeauty2024@gmail.com">krembeauty2024@gmail.com</a> &nbsp;·&nbsp; Telefon: <a href="tel:+48532585508">532&nbsp;585&nbsp;508</a></p>
-    </div>
+    <div class="contact-box" style="margin-top:34px"><p><strong>Kontakt w sprawie danych osobowych</strong></p><p>E-mail: <a href="mailto:krembeauty2024@gmail.com">krembeauty2024@gmail.com</a> &nbsp;·&nbsp; Telefon: <a href="tel:+48532585508">532&nbsp;585&nbsp;508</a></p></div>
   </main>
 </section>
-
 <section class="lang-content" data-lang="en">
-  <header class="pp-hero">
-    <div class="eyebrow">Krem Beauty</div>
-    <h1>Privacy Policy</h1>
-    <div class="updated">Last updated: 17 September 2026</div>
-  </header>
+  <header class="pp-hero"><div class="eyebrow">Krem Beauty</div><h1>Privacy Policy</h1><div class="updated">Last updated: 27 September 2026</div></header>
   <main class="pp-wrap">
-    <p>This policy explains how we process the personal data of people who visit our website and contact the <strong>Krem Beauty</strong> salon. We care about your privacy and only process the data that is genuinely needed.</p>
+    <p>This policy explains how we process the personal data of people who visit our website and contact the <strong>Krem Beauty</strong> salon.</p>
 
     <h2>1. Data Controller</h2>
     <p>The controller of your personal data is:</p>
@@ -150,71 +197,76 @@
     <p>E-mail: <a href="mailto:krembeauty2024@gmail.com">krembeauty2024@gmail.com</a></p>
     <p>Tax ID (NIP): 6762624788</p>
   </div>
-    <p>For any matter concerning your personal data, you can contact us using the details above.</p>
+    <p>For any matter concerning personal data, contact us using the details above.</p>
 
     <h2>2. What data we process and why</h2>
     <ul>
-      <li><strong>Phone contact and booking appointments.</strong> If you call us, we process the name and phone number you provide — in order to arrange and deliver the service and to call you back. Online booking is handled by the external service <strong>Booksy</strong>, which is a separate controller of your data.</li>
-      <li><strong>Chat assistant on the website.</strong> We process the content of the messages you type in the chat window — in order to answer questions about services, prices, or opening hours. Messages are sent to our AI technology provider, <strong>Anthropic PBC</strong> (USA), to generate a reply. We do not store these conversations on our servers. Please <strong>do not enter sensitive data</strong>, document numbers, or payment details in the chat.</li>
-      <li><strong>Technical data (server logs).</strong> On each visit, the hosting provider automatically records data such as your IP address, device and browser type, and the date and time — in order to keep the site running, stable, and secure.</li>
-      <li><strong>Google Fonts.</strong> The site loads fonts from Google's servers (Google Fonts), which may involve transmitting your IP address to Google.</li>
+      <li><strong>Contact form.</strong> We process your name, contact details (phone or e-mail), and the message content — solely to handle your enquiry and contact you. We do not use this data for a newsletter or marketing.</li>
+      <li><strong>Phone contact and bookings.</strong> Name and phone number — to arrange and deliver the service. Online booking is handled by <strong>Booksy</strong> (a separate controller).</li>
+      <li><strong>Chat assistant.</strong> The content of messages you type in the chat — to answer your questions. Messages are sent to our AI provider <strong>Anthropic PBC</strong> (USA). Please do not enter sensitive or payment data in the chat.</li>
+      <li><strong>Technical data (logs).</strong> IP address, device and browser type, date and time — recorded automatically by the hosting provider to keep the site running and secure.</li>
+      <li><strong>Google Analytics 4</strong> (only with your consent) — analysing traffic and how the site is used.</li>
+      <li><strong>Google Ads</strong> (only with your consent) — measuring ad effectiveness and conversions (e.g. phone-number clicks, form submissions).</li>
+      <li><strong>Google Fonts.</strong> The site loads fonts from Google's servers, which may transmit your IP address to Google.</li>
     </ul>
 
-    <h2>3. Legal bases for processing</h2>
-    <p>We process data on the basis of the GDPR:</p>
+    <h2>3. Legal bases</h2>
     <ul>
-      <li><strong>Art. 6(1)(b)</strong> — taking steps at your request prior to entering into a contract and performing the service (contact, booking);</li>
-      <li><strong>Art. 6(1)(f)</strong> — our legitimate interest: handling chat enquiries, keeping the website functional and secure, and defending against potential claims.</li>
+      <li><strong>Art. 6(1)(b) GDPR</strong> — handling your form/phone enquiry and steps to conclude and perform the service;</li>
+      <li><strong>Art. 6(1)(f) GDPR</strong> — legitimate interest: keeping the site functional and secure, running the chat, defending against claims;</li>
+      <li><strong>Art. 6(1)(a) GDPR</strong> — your consent for analytics (Google Analytics) and advertising (Google Ads) cookies; you can withdraw it at any time.</li>
     </ul>
 
-    <h2>4. Recipients of data</h2>
-    <p>To the extent necessary for the website to work, your data may be entrusted to trusted providers:</p>
+    <h2>4. Retention period</h2>
+    <ul>
+      <li>form and contact data — for as long as needed to handle the enquiry and for the limitation period of any claims;</li>
+      <li>technical logs — per the hosting provider's settings;</li>
+      <li>chat messages — not permanently stored by us;</li>
+      <li>data in Google tools — per the retention settings in Google Analytics/Ads.</li>
+    </ul>
+
+    <h2>5. Recipients of data</h2>
     <ul>
       <li><strong>Vercel Inc.</strong> — website hosting (USA);</li>
-      <li><strong>Anthropic PBC</strong> — the chat assistant on the site (USA);</li>
-      <li><strong>Google</strong> — fonts (Google Fonts) and Google Maps;</li>
-      <li><strong>Booksy</strong> — online booking system (if you use it);</li>
-      <li><strong>Meta Platforms</strong> — Instagram and Facebook: clicking our links takes you to services that process data under their own rules.</li>
+      <li><strong>Anthropic PBC</strong> — the chat assistant (USA);</li>
+      <li><strong>Google Ireland / Google LLC</strong> — Google Analytics, Google Ads, Google Tag Manager, fonts, Maps;</li>
+      <li><strong>Resend</strong> — sending contact-form messages (if enabled);</li>
+      <li><strong>Booksy</strong> — online booking (if you use it);</li>
+      <li><strong>Meta Platforms</strong> — Instagram and Facebook (when you click our links).</li>
     </ul>
     <p>We do not sell your personal data.</p>
 
-    <h2>5. Transfers outside the EEA</h2>
-    <p>Some of the services we use (Vercel, Anthropic, Google) are based in the United States, so data may be transferred outside the European Economic Area. This takes place on the basis of safeguards provided for in the GDPR — Standard Contractual Clauses and/or the Data Privacy Framework.</p>
+    <h2>6. Google tools (Analytics, Ads, Tag Manager)</h2>
+    <p><strong>Google Analytics 4</strong> helps us understand how visitors use the site (traffic statistics, sources). <strong>Google Ads</strong> is used to measure the effectiveness of our ads and conversions. <strong>Google Tag Manager</strong> is a tag manager that controls when the above tools run. Analytics and advertising tools are activated <strong>only after you give consent</strong>. To manage consent we use <strong>Google Consent Mode v2</strong>, so your choice is technically passed on to Google Analytics and Google Ads.</p>
 
-    <h2>6. Retention period</h2>
+    <h2>7. Cookies and consent management</h2>
+    <p>We divide cookies and similar technologies into categories:</p>
     <ul>
-      <li>contact and booking data — for as long as necessary to deliver the service and for the period of limitation of any claims;</li>
-      <li>technical logs — for the period resulting from the hosting provider's settings;</li>
-      <li>chat messages — are not permanently stored by us.</li>
+      <li><strong>Necessary</strong> — required for the site to work (e.g. remembering your language and consent). Always active.</li>
+      <li><strong>Analytics</strong> — Google Analytics; activated only with consent.</li>
+      <li><strong>Advertising</strong> — Google Ads; activated only with consent.</li>
     </ul>
+    <p>On your first visit we show a banner where you can accept all cookies, reject the optional ones, or adjust your settings. You can <strong>change or withdraw your choice at any time</strong> by clicking "Cookie settings" in the site footer.</p>
 
-    <h2>7. Cookies and browser storage</h2>
-    <p>The site <strong>does not use cookies for marketing or analytics purposes</strong> and does not track your activity. It only uses the browser's local storage (localStorage) to remember your chosen site language — this information stays on your device and is not sent to us. You can delete it at any time by clearing your browser data.</p>
+    <h2>8. Transfers outside the EEA</h2>
+    <p>Some providers (Google, Vercel, Anthropic, Resend) are based in the USA, so data may be transferred outside the European Economic Area — on the basis of safeguards provided for in the GDPR (Standard Contractual Clauses and/or the Data Privacy Framework).</p>
 
-    <h2>8. Your rights</h2>
-    <p>You have the right to: access your data, rectify it, erase it, restrict processing, object, data portability, and withdraw consent. You also have the right to lodge a complaint with the supervisory authority — the <strong>President of the Personal Data Protection Office (UODO)</strong> (ul. Stawki 2, 00-193 Warsaw, Poland).</p>
+    <h2>9. Your rights</h2>
+    <p>You have the right to: access, rectification, erasure, restriction of processing, objection, data portability, and withdrawal of consent. You also have the right to lodge a complaint with the <strong>President of the Personal Data Protection Office (UODO)</strong> (ul. Stawki 2, 00-193 Warsaw, Poland).</p>
 
-    <h2>9. Voluntary provision of data</h2>
-    <p>Providing your data is voluntary but necessary to book an appointment or to receive an answer to your enquiry.</p>
+    <h2>10. Voluntary provision of data</h2>
+    <p>Providing your data is voluntary but necessary to handle your enquiry or book an appointment.</p>
 
-    <h2>10. Changes to this policy</h2>
-    <p>We may update this policy from time to time. The current version is always available on this page, together with the date of the last update shown at the top.</p>
+    <h2>11. Changes to this policy</h2>
+    <p>We may update this policy from time to time. The current version is always available on this page, with the update date shown at the top.</p>
 
-    <div class="contact-box" style="margin-top:34px">
-      <p><strong>Contact regarding personal data</strong></p>
-      <p>E-mail: <a href="mailto:krembeauty2024@gmail.com">krembeauty2024@gmail.com</a> &nbsp;·&nbsp; Phone: <a href="tel:+48532585508">532&nbsp;585&nbsp;508</a></p>
-    </div>
+    <div class="contact-box" style="margin-top:34px"><p><strong>Contact regarding personal data</strong></p><p>E-mail: <a href="mailto:krembeauty2024@gmail.com">krembeauty2024@gmail.com</a> &nbsp;·&nbsp; Phone: <a href="tel:+48532585508">532&nbsp;585&nbsp;508</a></p></div>
   </main>
 </section>
-
 <section class="lang-content" data-lang="uk">
-  <header class="pp-hero">
-    <div class="eyebrow">Krem Beauty</div>
-    <h1>Політика конфіденційності</h1>
-    <div class="updated">Останнє оновлення: 17 вересня 2026</div>
-  </header>
+  <header class="pp-hero"><div class="eyebrow">Krem Beauty</div><h1>Політика конфіденційності</h1><div class="updated">Останнє оновлення: 27 вересня 2026</div></header>
   <main class="pp-wrap">
-    <p>Ця політика пояснює, як ми обробляємо персональні дані осіб, які відвідують наш вебсайт і звертаються до салону <strong>Krem Beauty</strong>. Ми дбаємо про вашу конфіденційність і обробляємо лише ті дані, які дійсно потрібні.</p>
+    <p>Ця політика пояснює, як ми обробляємо персональні дані осіб, які відвідують наш вебсайт і звертаються до салону <strong>Krem Beauty</strong>.</p>
 
     <h2>1. Адміністратор даних</h2>
     <p>Адміністратором ваших персональних даних є:</p>
@@ -223,88 +275,138 @@
     <p>ul. Krzywa 8, Kraków</p>
     <p>Телефон: <a href="tel:+48532585508">532&nbsp;585&nbsp;508</a></p>
     <p>E-mail: <a href="mailto:krembeauty2024@gmail.com">krembeauty2024@gmail.com</a></p>
-    <p>NIP (податковий номер): 6762624788</p>
+    <p>NIP: 6762624788</p>
   </div>
-    <p>З усіх питань щодо ваших персональних даних ви можете звернутися до нас за наведеними вище контактами.</p>
+    <p>З усіх питань щодо персональних даних звертайтеся до нас за наведеними вище контактами.</p>
 
     <h2>2. Які дані ми обробляємо та з якою метою</h2>
     <ul>
-      <li><strong>Контакт по телефону та запис на візит.</strong> Якщо ви телефонуєте нам, ми обробляємо ім'я та номер телефону, які ви надаєте, — щоб узгодити й надати послугу та зателефонувати вам у відповідь. Онлайн-запис здійснюється через зовнішній сервіс <strong>Booksy</strong>, який є окремим адміністратором ваших даних.</li>
-      <li><strong>Асистент (чат) на сайті.</strong> Ми обробляємо зміст повідомлень, які ви вводите у вікні чату, — щоб відповісти на запитання про послуги, ціни чи години роботи. Повідомлення передаються постачальнику технології ШІ, <strong>Anthropic PBC</strong> (США), для формування відповіді. Ми не зберігаємо ці розмови на своїх серверах. Просимо <strong>не вказувати в чаті конфіденційних даних</strong>, номерів документів чи платіжних даних.</li>
-      <li><strong>Технічні дані (журнали сервера).</strong> Під час кожного відвідування хостинг-провайдер автоматично записує, зокрема, IP-адресу, тип пристрою й браузера, дату та час — щоб забезпечити роботу, стабільність і безпеку сайту.</li>
-      <li><strong>Шрифти Google.</strong> Сайт завантажує шрифти із серверів Google (Google Fonts), що може передбачати передавання вашої IP-адреси до Google.</li>
+      <li><strong>Контактна форма.</strong> Ми обробляємо ім'я, контактні дані (телефон або e-mail) і текст повідомлення — виключно для опрацювання вашого звернення та зв'язку з вами. Ми не використовуємо ці дані для розсилки чи маркетингу.</li>
+      <li><strong>Контакт по телефону та запис.</strong> Ім'я та номер телефону — щоб узгодити й надати послугу. Онлайн-запис здійснюється через <strong>Booksy</strong> (окремий адміністратор).</li>
+      <li><strong>Асистент (чат).</strong> Зміст повідомлень у чаті — щоб відповісти на запитання. Повідомлення передаються постачальнику ШІ <strong>Anthropic PBC</strong> (США). Просимо не вказувати в чаті конфіденційних чи платіжних даних.</li>
+      <li><strong>Технічні дані (журнали).</strong> IP-адреса, тип пристрою й браузера, дата і час — автоматично записуються хостинг-провайдером для роботи й безпеки сайту.</li>
+      <li><strong>Google Analytics 4</strong> (лише за вашою згодою) — аналіз трафіку та користування сайтом.</li>
+      <li><strong>Google Ads</strong> (лише за вашою згодою) — вимірювання ефективності реклами та конверсій (напр., кліки по номеру телефону, надсилання форми).</li>
+      <li><strong>Шрифти Google.</strong> Сайт завантажує шрифти із серверів Google, що може передбачати передавання IP-адреси до Google.</li>
     </ul>
 
-    <h2>3. Правові підстави обробки</h2>
-    <p>Ми обробляємо дані на підставі GDPR (РОДО):</p>
+    <h2>3. Правові підстави</h2>
     <ul>
-      <li><strong>ст. 6 п. 1 літ. b</strong> — вжиття заходів на ваш запит перед укладенням договору та надання послуги (контакт, запис на візит);</li>
-      <li><strong>ст. 6 п. 1 літ. f</strong> — наш законний інтерес: обробка звернень через чат, забезпечення роботи й безпеки сайту та можливий захист від претензій.</li>
+      <li><strong>ст. 6 п. 1 літ. b GDPR</strong> — опрацювання звернення з форми/телефону та дії для укладення й надання послуги;</li>
+      <li><strong>ст. 6 п. 1 літ. f GDPR</strong> — законний інтерес: забезпечення роботи й безпеки сайту, робота чату, захист від претензій;</li>
+      <li><strong>ст. 6 п. 1 літ. a GDPR</strong> — ваша згода на аналітичні (Google Analytics) та рекламні (Google Ads) файли cookie; ви можете відкликати її будь-коли.</li>
     </ul>
 
-    <h2>4. Одержувачі даних</h2>
-    <p>У межах, необхідних для роботи сайту, ваші дані можуть передаватися надійним постачальникам:</p>
+    <h2>4. Строк зберігання</h2>
     <ul>
-      <li><strong>Vercel Inc.</strong> — хостинг вебсайту (США);</li>
-      <li><strong>Anthropic PBC</strong> — асистент (чат) на сайті (США);</li>
-      <li><strong>Google</strong> — шрифти (Google Fonts) та Google Карти;</li>
-      <li><strong>Booksy</strong> — система онлайн-запису (якщо ви нею користуєтеся);</li>
-      <li><strong>Meta Platforms</strong> — Instagram і Facebook: натиснувши на наші посилання, ви переходите до сервісів, які обробляють дані за власними правилами.</li>
+      <li>дані з форми та контактні — протягом часу, потрібного для опрацювання звернення, і строку позовної давності;</li>
+      <li>технічні журнали — згідно з налаштуваннями хостинг-провайдера;</li>
+      <li>повідомлення чату — ми не зберігаємо їх постійно;</li>
+      <li>дані в інструментах Google — згідно з налаштуваннями зберігання в Google Analytics/Ads.</li>
+    </ul>
+
+    <h2>5. Одержувачі даних</h2>
+    <ul>
+      <li><strong>Vercel Inc.</strong> — хостинг сайту (США);</li>
+      <li><strong>Anthropic PBC</strong> — асистент (чат) (США);</li>
+      <li><strong>Google Ireland / Google LLC</strong> — Google Analytics, Google Ads, Google Tag Manager, шрифти, Карти;</li>
+      <li><strong>Resend</strong> — надсилання повідомлень з контактної форми (якщо увімкнено);</li>
+      <li><strong>Booksy</strong> — онлайн-запис (якщо ви ним користуєтеся);</li>
+      <li><strong>Meta Platforms</strong> — Instagram і Facebook (після натискання наших посилань).</li>
     </ul>
     <p>Ми не продаємо ваші персональні дані.</p>
 
-    <h2>5. Передавання даних за межі ЄЕЗ</h2>
-    <p>Частина сервісів, якими ми користуємося (Vercel, Anthropic, Google), розташована у Сполучених Штатах, тому дані можуть передаватися за межі Європейського економічного простору. Це відбувається на підставі гарантій, передбачених GDPR, — стандартних договірних положень та/або програми Data Privacy Framework.</p>
+    <h2>6. Інструменти Google (Analytics, Ads, Tag Manager)</h2>
+    <p><strong>Google Analytics 4</strong> допомагає зрозуміти, як відвідувачі користуються сайтом (статистика трафіку, джерела). <strong>Google Ads</strong> використовується для вимірювання ефективності реклами та конверсій. <strong>Google Tag Manager</strong> — менеджер тегів, який керує запуском цих інструментів. Аналітичні та рекламні інструменти запускаються <strong>лише після вашої згоди</strong>. Для керування згодою ми застосовуємо <strong>Google Consent Mode v2</strong>, завдяки чому ваш вибір технічно передається до Google Analytics і Google Ads.</p>
 
-    <h2>6. Строк зберігання</h2>
+    <h2>7. Файли cookie та керування згодами</h2>
+    <p>Ми поділяємо файли cookie та подібні технології на категорії:</p>
     <ul>
-      <li>контактні дані та дані запису — протягом часу, необхідного для надання послуги, і протягом строку позовної давності щодо можливих претензій;</li>
-      <li>технічні журнали — протягом строку, що випливає з налаштувань хостинг-провайдера;</li>
-      <li>повідомлення з чату — ми не зберігаємо їх постійно.</li>
+      <li><strong>Необхідні</strong> — потрібні для роботи сайту (напр., запам'ятовування мови та згоди). Завжди активні.</li>
+      <li><strong>Аналітичні</strong> — Google Analytics; лише за згодою.</li>
+      <li><strong>Рекламні</strong> — Google Ads; лише за згодою.</li>
     </ul>
+    <p>Під час першого відвідування ми показуємо банер, де ви можете прийняти всі файли cookie, відхилити необов'язкові або налаштувати їх. Свій вибір ви можете <strong>будь-коли змінити або відкликати</strong>, натиснувши «Налаштування cookie» у нижній частині сайту.</p>
 
-    <h2>7. Файли cookie та пам'ять браузера</h2>
-    <p>Сайт <strong>не використовує файли cookie для маркетингових чи аналітичних цілей</strong> і не відстежує вашу активність. Він використовує лише локальну пам'ять браузера (localStorage), щоб запам'ятати обрану мову сайту, — ця інформація залишається на вашому пристрої й не передається нам. Ви можете будь-коли видалити її, очистивши дані браузера.</p>
+    <h2>8. Передавання даних за межі ЄЕЗ</h2>
+    <p>Частина постачальників (Google, Vercel, Anthropic, Resend) розташована у США, тому дані можуть передаватися за межі Європейського економічного простору — на підставі гарантій, передбачених GDPR (стандартні договірні положення та/або Data Privacy Framework).</p>
 
-    <h2>8. Ваші права</h2>
-    <p>Ви маєте право: на доступ до своїх даних, їх виправлення, видалення, обмеження обробки, заперечення, перенесення даних та відкликання згоди. Ви також маєте право подати скаргу до наглядового органу — <strong>Голови Управління з питань захисту персональних даних (UODO)</strong> (ul. Stawki 2, 00-193 Варшава, Польща).</p>
+    <h2>9. Ваші права</h2>
+    <p>Ви маєте право на: доступ, виправлення, видалення, обмеження обробки, заперечення, перенесення даних та відкликання згоди. Ви також маєте право подати скаргу до <strong>Голови Управління з питань захисту персональних даних (UODO)</strong> (ul. Stawki 2, 00-193 Варшава, Польща).</p>
 
-    <h2>9. Добровільність надання даних</h2>
-    <p>Надання даних є добровільним, але необхідним для запису на візит або отримання відповіді на ваше звернення.</p>
+    <h2>10. Добровільність надання даних</h2>
+    <p>Надання даних є добровільним, але необхідним для опрацювання звернення або запису на візит.</p>
 
-    <h2>10. Зміни політики конфіденційності</h2>
-    <p>Ми можемо періодично оновлювати цю політику. Актуальна версія завжди доступна на цій сторінці разом із датою останнього оновлення, зазначеною вгорі.</p>
+    <h2>11. Зміни політики</h2>
+    <p>Ми можемо періодично оновлювати цю політику. Актуальна версія завжди доступна на цій сторінці, з датою оновлення вгорі.</p>
 
-    <div class="contact-box" style="margin-top:34px">
-      <p><strong>Контакт щодо персональних даних</strong></p>
-      <p>E-mail: <a href="mailto:krembeauty2024@gmail.com">krembeauty2024@gmail.com</a> &nbsp;·&nbsp; Телефон: <a href="tel:+48532585508">532&nbsp;585&nbsp;508</a></p>
-    </div>
+    <div class="contact-box" style="margin-top:34px"><p><strong>Контакт щодо персональних даних</strong></p><p>E-mail: <a href="mailto:krembeauty2024@gmail.com">krembeauty2024@gmail.com</a> &nbsp;·&nbsp; Телефон: <a href="tel:+48532585508">532&nbsp;585&nbsp;508</a></p></div>
   </main>
 </section>
-
 <footer class="pp-foot">
-  © 2026 Krem Beauty · <a href="index.html" id="footHome">Strona główna</a>
+  © 2026 Krem Beauty · <a href="index.html" id="footHome">Strona główna</a> · <button type="button" id="ccCookieBtn">Ustawienia cookies</button>
 </footer>
-
+<div class="cc-banner" id="ccBanner" role="dialog" aria-label="Cookies">
+  <p class="cc-text" id="ccText"></p>
+  <div class="cc-actions">
+    <button type="button" class="cc-btn cc-ghost" id="ccReject"></button>
+    <button type="button" class="cc-btn cc-ghost" id="ccSettings"></button>
+    <button type="button" class="cc-btn cc-primary" id="ccAcceptAll"></button>
+  </div>
+</div>
+<div class="cc-modal-overlay" id="ccModal">
+  <div class="cc-modal" role="dialog" aria-modal="true">
+    <div class="cc-modal-head"><h3 class="cc-modal-title" id="ccTitle"></h3><button type="button" class="cc-modal-close" id="ccModalClose" aria-label="X">✕</button></div>
+    <div class="cc-cat"><div class="cc-cat-head"><span class="cc-cat-name" id="ccNecName"></span><span class="cc-always" id="ccAlways"></span></div><p class="cc-cat-desc" id="ccNecDesc"></p></div>
+    <div class="cc-cat"><div class="cc-cat-head"><span class="cc-cat-name" id="ccAnaName"></span><label class="cc-switch"><input type="checkbox" id="ccAnalytics"><span class="cc-slider"></span></label></div><p class="cc-cat-desc" id="ccAnaDesc"></p></div>
+    <div class="cc-cat"><div class="cc-cat-head"><span class="cc-cat-name" id="ccAdsName"></span><label class="cc-switch"><input type="checkbox" id="ccAds"><span class="cc-slider"></span></label></div><p class="cc-cat-desc" id="ccAdsDesc"></p></div>
+    <div class="cc-modal-actions"><button type="button" class="cc-btn cc-ghost" id="ccSaveSettings"></button><button type="button" class="cc-btn cc-primary" id="ccAcceptAll2"></button></div>
+  </div>
+</div>
 <script>
-  var BACK = { pl:'← Powrót na stronę główną', en:'← Back to homepage', uk:'← Назад на головну' };
-  var HOME = { pl:'Strona główna', en:'Homepage', uk:'Головна' };
-  var TITLE = { pl:'Polityka prywatności – Krem Beauty', en:'Privacy Policy – Krem Beauty', uk:'Політика конфіденційності – Krem Beauty' };
+  var BACK={pl:'\u2190 Powr\u00f3t na stron\u0119 g\u0142\u00f3wn\u0105',en:'\u2190 Back to homepage',uk:'\u2190 \u041d\u0430\u0437\u0430\u0434 \u043d\u0430 \u0433\u043e\u043b\u043e\u0432\u043d\u0443'};
+  var HOME={pl:'Strona g\u0142\u00f3wna',en:'Homepage',uk:'\u0413\u043e\u043b\u043e\u0432\u043d\u0430'};
+  var TITLE={pl:'Polityka prywatno\u015bci \u2013 Krem Beauty',en:'Privacy Policy \u2013 Krem Beauty',uk:'\u041f\u043e\u043b\u0456\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0456\u0434\u0435\u043d\u0446\u0456\u0439\u043d\u043e\u0441\u0442\u0456 \u2013 Krem Beauty'};
+  var CC={
+    pl:{text:"U\u017cywamy plik\u00f3w cookies niezb\u0119dnych do prawid\u0142owego dzia\u0142ania strony oraz \u2013 za Twoj\u0105 zgod\u0105 \u2013 plik\u00f3w analitycznych i reklamowych Google Analytics i Google Ads. Mo\u017cesz zaakceptowa\u0107 wszystkie pliki cookies, odrzuci\u0107 opcjonalne lub dostosowa\u0107 swoje ustawienia.",reject:"Odrzucam",settings:"Ustawienia",acceptAll:"Akceptuj\u0119 wszystkie",title:"Ustawienia plik\u00f3w cookies",nec:"Niezb\u0119dne",always:"Zawsze aktywne",necD:"Konieczne do dzia\u0142ania strony (np. zapami\u0119tanie j\u0119zyka i Twojej zgody). Nie mo\u017cna ich wy\u0142\u0105czy\u0107.",ana:"Analityczne",anaD:"Google Analytics \u2013 pomagaj\u0105 nam zrozumie\u0107, jak korzystasz ze strony.",ads:"Reklamowe",adsD:"Google Ads \u2013 pozwalaj\u0105 mierzy\u0107 skuteczno\u015b\u0107 reklam i lepiej je dopasowywa\u0107.",save:"Zapisz ustawienia",cookieBtn:"Ustawienia cookies"},
+    en:{text:"We use cookies necessary for the site to work and \u2013 with your consent \u2013 analytics and advertising cookies from Google Analytics and Google Ads. You can accept all cookies, reject the optional ones, or adjust your settings.",reject:"Reject",settings:"Settings",acceptAll:"Accept all",title:"Cookie settings",nec:"Necessary",always:"Always active",necD:"Required for the site to work (e.g. remembering your language and consent). They cannot be disabled.",ana:"Analytics",anaD:"Google Analytics \u2013 helps us understand how you use the site.",ads:"Advertising",adsD:"Google Ads \u2013 lets us measure ad effectiveness and improve targeting.",save:"Save settings",cookieBtn:"Cookie settings"},
+    uk:{text:"\u041c\u0438 \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0454\u043c\u043e \u0444\u0430\u0439\u043b\u0438 cookie, \u043d\u0435\u043e\u0431\u0445\u0456\u0434\u043d\u0456 \u0434\u043b\u044f \u0440\u043e\u0431\u043e\u0442\u0438 \u0441\u0430\u0439\u0442\u0443, \u0430 \u0442\u0430\u043a\u043e\u0436 \u2013 \u0437\u0430 \u0432\u0430\u0448\u043e\u044e \u0437\u0433\u043e\u0434\u043e\u044e \u2013 \u0430\u043d\u0430\u043b\u0456\u0442\u0438\u0447\u043d\u0456 \u0442\u0430 \u0440\u0435\u043a\u043b\u0430\u043c\u043d\u0456 cookie Google Analytics \u0456 Google Ads. \u0412\u0438 \u043c\u043e\u0436\u0435\u0442\u0435 \u043f\u0440\u0438\u0439\u043d\u044f\u0442\u0438 \u0432\u0441\u0456, \u0432\u0456\u0434\u0445\u0438\u043b\u0438\u0442\u0438 \u043d\u0435\u043e\u0431\u043e\u0432\u2019\u044f\u0437\u043a\u043e\u0432\u0456 \u0430\u0431\u043e \u043d\u0430\u043b\u0430\u0448\u0442\u0443\u0432\u0430\u0442\u0438 \u0457\u0445.",reject:"\u0412\u0456\u0434\u0445\u0438\u043b\u0438\u0442\u0438",settings:"\u041d\u0430\u043b\u0430\u0448\u0442\u0443\u0432\u0430\u043d\u043d\u044f",acceptAll:"\u041f\u0440\u0438\u0439\u043d\u044f\u0442\u0438 \u0432\u0441\u0456",title:"\u041d\u0430\u043b\u0430\u0448\u0442\u0443\u0432\u0430\u043d\u043d\u044f cookie",nec:"\u041d\u0435\u043e\u0431\u0445\u0456\u0434\u043d\u0456",always:"\u0417\u0430\u0432\u0436\u0434\u0438 \u0430\u043a\u0442\u0438\u0432\u043d\u0456",necD:"\u041f\u043e\u0442\u0440\u0456\u0431\u043d\u0456 \u0434\u043b\u044f \u0440\u043e\u0431\u043e\u0442\u0438 \u0441\u0430\u0439\u0442\u0443 (\u043c\u043e\u0432\u0430, \u0437\u0433\u043e\u0434\u0430). \u0407\u0445 \u043d\u0435 \u043c\u043e\u0436\u043d\u0430 \u0432\u0438\u043c\u043a\u043d\u0443\u0442\u0438.",ana:"\u0410\u043d\u0430\u043b\u0456\u0442\u0438\u0447\u043d\u0456",anaD:"Google Analytics \u2013 \u0434\u043e\u043f\u043e\u043c\u0430\u0433\u0430\u044e\u0442\u044c \u0437\u0440\u043e\u0437\u0443\u043c\u0456\u0442\u0438, \u044f\u043a \u0432\u0438 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0454\u0442\u0435\u0441\u044f \u0441\u0430\u0439\u0442\u043e\u043c.",ads:"\u0420\u0435\u043a\u043b\u0430\u043c\u043d\u0456",adsD:"Google Ads \u2013 \u0434\u043e\u0437\u0432\u043e\u043b\u044f\u044e\u0442\u044c \u0432\u0438\u043c\u0456\u0440\u044e\u0432\u0430\u0442\u0438 \u0435\u0444\u0435\u043a\u0442\u0438\u0432\u043d\u0456\u0441\u0442\u044c \u0440\u0435\u043a\u043b\u0430\u043c\u0438.",save:"\u0417\u0431\u0435\u0440\u0435\u0433\u0442\u0438 \u043d\u0430\u043b\u0430\u0448\u0442\u0443\u0432\u0430\u043d\u043d\u044f",cookieBtn:"\u041d\u0430\u043b\u0430\u0448\u0442\u0443\u0432\u0430\u043d\u043d\u044f cookie"}
+  };
+  function txt(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
   function setLang(l){
-    if(['pl','en','uk'].indexOf(l)===-1) l='pl';
-    document.documentElement.lang = l;
-    document.querySelectorAll('.lang-content').forEach(function(s){ s.style.display = (s.getAttribute('data-lang')===l) ? '' : 'none'; });
-    document.querySelectorAll('.pp-lang button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-l')===l); });
-    document.getElementById('backLink').textContent = BACK[l];
-    document.getElementById('footHome').textContent = HOME[l];
-    document.title = TITLE[l];
-    try { localStorage.setItem('krem_lang', l); } catch(e){}
+    if(['pl','en','uk'].indexOf(l)===-1)l='pl';
+    document.documentElement.lang=l;
+    document.querySelectorAll('.lang-content').forEach(function(s){s.style.display=(s.getAttribute('data-lang')===l)?'':'none';});
+    document.querySelectorAll('.pp-lang button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-l')===l);});
+    txt('backLink',BACK[l]);txt('footHome',HOME[l]);document.title=TITLE[l];
+    var c=CC[l];
+    txt('ccText',c.text);txt('ccReject',c.reject);txt('ccSettings',c.settings);txt('ccAcceptAll',c.acceptAll);txt('ccAcceptAll2',c.acceptAll);
+    txt('ccTitle',c.title);txt('ccNecName',c.nec);txt('ccAlways',c.always);txt('ccNecDesc',c.necD);
+    txt('ccAnaName',c.ana);txt('ccAnaDesc',c.anaD);txt('ccAdsName',c.ads);txt('ccAdsDesc',c.adsD);
+    txt('ccSaveSettings',c.save);txt('ccCookieBtn',c.cookieBtn);
+    try{localStorage.setItem('krem_lang',l);}catch(e){}
   }
-  document.querySelectorAll('.pp-lang button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.getAttribute('data-l')); }); });
-  var saved = 'pl';
-  try { saved = localStorage.getItem('krem_lang') || 'pl'; } catch(e){}
-  setLang(saved);
-</script>
+  document.querySelectorAll('.pp-lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-l'));});});
+  var savedLang='pl';try{savedLang=localStorage.getItem('krem_lang')||'pl';}catch(e){}
+  setLang(savedLang);
 
+  /* consent */
+  var CKEY='krem_consent';
+  function readC(){try{return JSON.parse(localStorage.getItem(CKEY)||'null');}catch(e){return null;}}
+  function saveC(o){try{localStorage.setItem(CKEY,JSON.stringify(o));}catch(e){}}
+  function applyC(o){try{gtag('consent','update',{analytics_storage:o.analytics?'granted':'denied',ad_storage:o.ads?'granted':'denied',ad_user_data:o.ads?'granted':'denied',ad_personalization:o.ads?'granted':'denied'});}catch(e){}try{window.dataLayer.push({event:'consent_update',analytics_consent:!!o.analytics,ads_consent:!!o.ads});}catch(e){}}
+  var banner=document.getElementById('ccBanner'),modal=document.getElementById('ccModal'),cbA=document.getElementById('ccAnalytics'),cbAds=document.getElementById('ccAds');
+  function openModal(){var c=readC()||{analytics:false,ads:false};if(cbA)cbA.checked=!!c.analytics;if(cbAds)cbAds.checked=!!c.ads;if(modal)modal.classList.add('show');}
+  function closeModal(){if(modal)modal.classList.remove('show');}
+  function decide(o){saveC(o);applyC(o);if(banner)banner.classList.remove('show');closeModal();}
+  function on(id,fn){var el=document.getElementById(id);if(el)el.addEventListener('click',fn);}
+  on('ccAcceptAll',function(){decide({analytics:true,ads:true});});
+  on('ccAcceptAll2',function(){decide({analytics:true,ads:true});});
+  on('ccReject',function(){decide({analytics:false,ads:false});});
+  on('ccSettings',openModal);on('ccCookieBtn',openModal);on('ccModalClose',closeModal);
+  on('ccSaveSettings',function(){decide({analytics:!!(cbA&&cbA.checked),ads:!!(cbAds&&cbAds.checked)});});
+  if(modal)modal.addEventListener('click',function(e){if(e.target===modal)closeModal();});
+  var stored=readC();if(stored){applyC(stored);}else if(banner){banner.classList.add('show');}
+</script>
 </body>
 </html>
