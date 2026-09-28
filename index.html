@@ -2792,6 +2792,7 @@
         <input class="cf-input" type="text" id="cfContact" name="contact" placeholder="Telefon lub e-mail" maxlength="120" required>
       </div>
       <textarea class="cf-input cf-textarea" id="cfMessage" name="message" rows="4" placeholder="Twoja wiadomość" maxlength="1500" required></textarea>
+      <input type="checkbox" name="botcheck" id="cfBot" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none !important">
       <button type="submit" class="cf-submit" id="cfSubmit">Wyślij wiadomość</button>
       <div class="cf-status" id="cfStatus" role="status" aria-live="polite"></div>
       <p class="cf-info">Administratorem Twoich danych osobowych jest Nataliya Savka, prowadząca KREM Beauty Salon (ul. Krzywa 8, Kraków). Dane podane w formularzu przetwarzamy w celu obsługi Twojego zapytania i kontaktu z Tobą. Szczegółowe informacje dotyczące przetwarzania danych osobowych znajdziesz w <a href="polityka-prywatnosci.html">Polityce Prywatności</a>.</p>
@@ -3389,22 +3390,45 @@ Gdy klient pyta o rezerwację, zawsze podaj link do Booksy. Bądź ciepła i pro
         statusEl.textContent=L('Uzupełnij wszystkie pola.','Please fill in all fields.','Заповніть усі поля.');
         return;
       }
+      /* ===== Web3Forms – wklej swój klucz dostępu poniżej ===== */
+      var WEB3FORMS_KEY = 'b4d805d1-b0da-4bec-9e53-ccec5c0e2320';
+      if (WEB3FORMS_KEY.indexOf('WKLEJ') > -1 || WEB3FORMS_KEY.length < 12) {
+        statusEl.className='cf-status err';
+        statusEl.textContent=L('Formularz nie został jeszcze skonfigurowany.','The form is not configured yet.','Форму ще не налаштовано.');
+        return;
+      }
       btn.disabled=true;
       statusEl.textContent=L('Wysyłanie…','Sending…','Надсилання…');
-      fetch('/api/contact',{ method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name:name, contact:contact, message:message}) })
-      .then(function(r){ return r.json().catch(function(){return {};}).then(function(d){ return {ok:r.ok, d:d}; }); })
+      fetch('https://api.web3forms.com/submit',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'Nowa wiadomość z formularza — ' + name,
+          from_name: 'Krem Beauty — formularz',
+          name: name,
+          kontakt: contact,
+          message: message,
+          replyto: (contact.indexOf('@') > -1 ? contact : ''),
+          botcheck: !!(document.getElementById('cfBot') && document.getElementById('cfBot').checked)
+        })
+      })
+      .then(function(r){ return r.json().catch(function(){return {};}).then(function(d){ return {ok:r.ok, status:r.status, d:d}; }); })
       .then(function(res){
-        if(res.ok){
+        if(res.ok && res.d && res.d.success){
           statusEl.className='cf-status ok';
           statusEl.textContent=L('Dziękujemy! Wiadomość została wysłana. Odezwiemy się wkrótce.','Thank you! Your message has been sent. We will get back to you soon.','Дякуємо! Повідомлення надіслано. Ми скоро відповімо.');
           form.reset();
           trackEvent('generate_lead', { form:'contact' });
           adsConversion(ADS_FORM_SEND_TO);
-        } else { throw new Error('fail'); }
+        } else {
+          statusEl.className='cf-status err';
+          statusEl.textContent=L('Nie udało się wysłać. Zadzwoń: 532 585 508','Sending failed. Call us: 532 585 508','Не вдалося надіслати. Телефонуйте: 532 585 508');
+        }
       })
       .catch(function(){
         statusEl.className='cf-status err';
-        statusEl.textContent=L('Nie udało się wysłać. Zadzwoń: 532 585 508','Sending failed. Call us: 532 585 508','Не вдалося надіслати. Телефонуйте: 532 585 508');
+        statusEl.textContent=L('Błąd połączenia. Zadzwoń: 532 585 508','Connection error. Call us: 532 585 508','Помилка з’єднання. Телефонуйте: 532 585 508');
       })
       .then(function(){ btn.disabled=false; });
     });
